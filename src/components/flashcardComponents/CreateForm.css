@@ -34,17 +34,18 @@ form {
     width: 100%;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 10px 0;
 }
 .card-actions {
     display: flex;
+    padding: 0 20px;
     justify-content: space-between;
     align-items: center;
 }
 hr {
     margin: 10px 0;
     border: none;
-    height: 1px;
+    height: 2px;
     background: black;
 }
 .term {grid-area: term;}
@@ -58,6 +59,7 @@ hr {
     'term-desc def-desc';
     column-gap: 20px;
     row-gap: 5px;
+    padding: 10px 20px;
 }
 .card-input input {
     background: none;
