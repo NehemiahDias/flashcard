@@ -1,5 +1,6 @@
 :root {
     --dark: #0F4C5C;
+    --light: #029784;
     --accent: #F79334;
 }
 * {
@@ -7,6 +8,7 @@
     padding: 0;
     box-sizing: border-box;
     color: #FFFCF9;
+    scroll-behavior: smooth;
 }
 body, html {
     background-color: var(--dark);

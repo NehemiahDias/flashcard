@@ -1,13 +1,15 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import './CreateForm.css';
 
 function CreateForm() {
-  const [deck, setDeck] = useState({
+  const initialState = {
     deckName: '',
     deckDescription: '',
-    deckCards: [],
-  })
+    deckCards: null,
+  }
+  const [deck, setDeck] = useState(initialState)
   const [cards, setCards] = useState([{title: '', definition: '', id: 1}]);
 
   const updateCardTitle = (e, val) => {
@@ -41,10 +43,23 @@ function CreateForm() {
     }))
   }
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    setDeck({...deck, deckCards: cards})
+  const handleSubmit = (e) => {
+    setDeck({...deck, deckCards: cards});
   }
+
+  useEffect(() => {
+    if (deck.deckCards !== null){
+      let currentStorage = localStorage.getItem('decks');
+      if (currentStorage !== null){
+        currentStorage = JSON.parse(currentStorage);
+        console.log(currentStorage)
+        currentStorage = [...currentStorage, deck];
+        localStorage.setItem('decks', JSON.stringify(currentStorage));
+      } else {
+        localStorage.setItem('decks', JSON.stringify([deck]));
+      }
+    } 
+  }, [deck])
 
   return (
     <div className="create-deck">

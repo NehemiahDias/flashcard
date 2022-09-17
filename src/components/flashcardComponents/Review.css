@@ -1,0 +1,44 @@
+.create-deck-review {
+    text-decoration: underline;
+}
+.create-deck-review:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+.all-decks {
+    padding: 30px 70px;
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.full-deck {
+    display: flex;
+    width: 100%;
+    background-color: var(--light);
+}
+.delete-deck {
+    height: 100%;
+    width: 100%;
+}
+.deck-action {
+    width: 10%;
+}
+.deck {
+    padding: 15px 30px;
+    width: 90%;
+    background-color: var(--light);
+    border-radius: 5px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.4) -3px 3px 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.deck:hover {
+    cursor: pointer;
+    background-color: #03806f;
+}
+.deck:active {
+    box-shadow: rgba(0, 0, 0, 0.4) -1px 1px 3px;
+}

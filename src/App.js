@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingComponent from "./components/landingComponents/LandingComponent";
 import NavComponent from "./components/universalComponents/NavComponent";
 import CreateFlashcard from "./components/flashcardComponents/CreateFlashcard";
+import ReviewFlashcard from "./components/flashcardComponents/ReviewFlashcard";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<LandingComponent/>}/>
         <Route path='/create-flashcard' element={<CreateFlashcard/>}/>
+        <Route path='/review-flashcard' element={<ReviewFlashcard/>}/>
       </Routes>
       
     </BrowserRouter>
