@@ -23,13 +23,22 @@ function CreateForm() {
 
   const updateCardDefinition = (e, val) => {
     setCards(current =>
-      current.map((obj, i) => {
+      current.map((obj) => {
         if (val === obj) {
           return {...obj, definition: e.target.value};
         }
         return obj;
       }),
     );
+  }
+
+
+  const handleDeleteCard = cardToDelete => {
+    setCards(current => current.filter(val => {
+      if (val !== cardToDelete){
+        return val;
+      }
+    }))
   }
 
   const handleSubmit = e => {
@@ -39,7 +48,7 @@ function CreateForm() {
 
   return (
     <div className="create-deck">
-      <h3>Create Deck</h3>
+      <h3 id='new-deck'>Create Deck</h3>
       <form onSubmit={handleSubmit}>
           <input 
               placeholder='Study Deck Title...'
@@ -55,6 +64,7 @@ function CreateForm() {
           >
           </textarea>
           <div className="new-cards">
+            <h1>FLASH CARDS</h1>
             {cards.map((card, index) => 
             (
               <div className="card" key={index}>
@@ -63,7 +73,7 @@ function CreateForm() {
                     <p>{index + 1}</p>
                   </div>
                   <div className="delete">
-                    <p>🗑️</p>
+                    <button className='delete-icon' type='button' onClick={() => handleDeleteCard(card)}>🗑️</button>
                   </div>
                 </div>
                 <hr />
