@@ -1,0 +1,48 @@
+.information {
+    width: 100%;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    padding: 30px 70px;
+    height: 90vh;
+}
+.intro {
+    width: 60%;
+    text-align: center;
+}
+.intro h1 {
+    font-size: 2.5rem;
+}
+.intro p {
+    font-size: 20px;
+}
+.intro h1 {
+    margin-bottom: 20px;
+}
+.start-now {
+    text-align: center;
+    width: 40%;
+}
+.cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 20%;
+}
+.start-now button {
+    padding: 15px 30px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.5) -1px 2px 2px;
+    border-radius: 50px;
+    background-color: #800080;
+    color: white;
+}
+.start-now button:hover {
+    cursor: pointer;
+    background-color: #6e056e;
+}
+.start-now button:active {
+    background-color: #470547;
+    box-shadow: none;
+}
