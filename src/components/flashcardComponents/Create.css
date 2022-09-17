@@ -1,9 +1,8 @@
 .information {
     width: 100%;
-    background-color: aliceblue;
     display: flex;
     align-items: center;
-    padding: 30px 70px;
+    padding: 30px 100px;
     height: 90vh;
 }
 .intro {
@@ -35,14 +34,14 @@
     border: none;
     box-shadow: rgba(0, 0, 0, 0.5) -1px 2px 2px;
     border-radius: 50px;
-    background-color: #800080;
-    color: white;
+    background-color: var(--accent);
+    color: var(--dark);
+    font-weight: bold;
 }
 .start-now button:hover {
     cursor: pointer;
-    background-color: #6e056e;
+    background-color: #e0842e;
 }
 .start-now button:active {
-    background-color: #470547;
     box-shadow: none;
 }

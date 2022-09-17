@@ -15,7 +15,7 @@ function CreateFlashcard() {
                 <div className="start-now">
                     <div className="cta">
                         <p>Begin your studying journey for FREE!</p>
-                        <button onClick={() => setCreateFlash(createFlash ? false : true)}>START NOW</button>
+                        <button onClick={() => setCreateFlash(createFlash ? false : true)}>CREATE DECK</button>
                     </div>
                 </div>
             </div>

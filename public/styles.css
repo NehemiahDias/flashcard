@@ -1,5 +1,14 @@
+:root {
+    --dark: #0F4C5C;
+    --accent: #F79334;
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: #FFFCF9;
+}
+body, html {
+    background-color: var(--dark);
+    height: 100%;
 }

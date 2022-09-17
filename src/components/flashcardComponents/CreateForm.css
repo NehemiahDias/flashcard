@@ -1,0 +1,48 @@
+.create-deck {
+    width: 100%;
+    padding: 0 100px;
+}
+.create-deck h3 {
+    margin-bottom: 30px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px;
+}
+.deck-input::placeholder {
+    color: white;
+}
+.deck-input {
+    border-radius: 5px;
+    border: none;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.add-card {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.submit {
+    width: 100px;
+    height: 50px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    color: var(--dark);
+    font-weight: bold;
+    background-color: var(--accent);
+    box-shadow: rgba(0, 0, 0, 0.5) -1px 2px 2px;
+}
+.submit:hover {
+    cursor: pointer;
+    background-color: #e0842e;
+}
+.submit:active {
+    box-shadow: none;
+}
