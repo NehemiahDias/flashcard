@@ -14,7 +14,11 @@ function CreateForm() {
               className='deck-input'
               required
           />
-          <textarea placeholder='Description...' className='deck-input' rows='5'>
+          <textarea 
+            placeholder='Description...' 
+            className='deck-input' 
+            rows='5'
+          >
           </textarea>
           <div className="new-cards">
             <div className="card">
@@ -26,9 +30,18 @@ function CreateForm() {
                   <p>🗑️</p>
                 </div>
               </div>
+              <hr />
               <div className="card-input">
-                <input placeholder='Term...' />
-                <input placeholder='Definition...' />
+                <input 
+                  placeholder='Enter Term'
+                  className='term' 
+                />
+                <p className='term-desc'>Term</p>
+                <input 
+                  placeholder='Enter Definition'
+                  className='def' 
+                />
+                <p className='def-desc'>Definition</p>
               </div>
             </div>
           </div>

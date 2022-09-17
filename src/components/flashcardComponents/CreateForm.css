@@ -27,7 +27,57 @@ form {
     font-weight: bold;
     color: white;
 }
-
+.new-cards {
+    width: 100%;
+}
+.card {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+hr {
+    margin: 10px 0;
+    border: none;
+    height: 1px;
+    background: black;
+}
+.term {grid-area: term;}
+.def {grid-area: def;}
+.term-desc {grid-area: term-desc;}
+.def-desc {grid-area: def-desc;}
+.card-input {
+    display: grid;
+    grid-template-areas: 
+    'term def'
+    'term-desc def-desc';
+    column-gap: 20px;
+    row-gap: 5px;
+}
+.card-input input {
+    background: none;
+    border: none;
+    border-bottom: 3px solid white;
+}
+.desc {grid-area: desc;}
+.card-input input::placeholder {
+    color: white;
+}
+.card-input input:focus {
+    outline: none;
+    border-bottom: 4px solid var(--accent);
+}
+.card-input input {
+    width: 100%;
+}
+.card-input input::after {
+    content: 'Term';
+}
 .submit {
     width: 100px;
     height: 50px;
