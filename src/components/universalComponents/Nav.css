@@ -1,0 +1,20 @@
+.navbar {
+    width: 100%;
+    height: 70px;
+    background-color: tomato;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: whitesmoke;
+}
+nav {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+.link {
+    color: white;
+}
+.link:hover {
+    text-decoration: none;
+}
