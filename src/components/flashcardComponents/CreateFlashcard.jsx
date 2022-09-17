@@ -5,6 +5,10 @@ import './Create.css';
 function CreateFlashcard() {
     const [createFlash, setCreateFlash] = useState(false);
 
+    const toggleCreateForm = () => {
+        setCreateFlash(createFlash ? false : true);
+    }
+
     return (
         <section id='create-flashcard'>
             <div className="information">
@@ -16,7 +20,7 @@ function CreateFlashcard() {
                     <div className="cta">
                         <p>Begin your studying journey for FREE!</p>
                         <button onClick={() => {
-                            setCreateFlash(createFlash ? false : true);
+                            toggleCreateForm();
                             setTimeout(() => {
                                 window.scrollTo(0, document.body.scrollHeight);
                             }, 200)

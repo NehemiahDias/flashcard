@@ -12,7 +12,7 @@ function CreateForm() {
 
   const updateCardTitle = (e, val) => {
     setCards(current =>
-      current.map((obj, i) => {
+      current.map(obj => {
         if (val === obj) {
           return {...obj, title: e.target.value};
         }
@@ -32,12 +32,12 @@ function CreateForm() {
     );
   }
 
-
   const handleDeleteCard = cardToDelete => {
     setCards(current => current.filter(val => {
       if (val !== cardToDelete){
         return val;
       }
+      return null;
     }))
   }
 
@@ -73,7 +73,7 @@ function CreateForm() {
                     <p>{index + 1}</p>
                   </div>
                   <div className="delete">
-                    <button className='delete-icon' type='button' onClick={() => handleDeleteCard(card)}>🗑️</button>
+                    <button className='delete-icon' type='button' onClick={() => handleDeleteCard(card)} disabled={cards.length > 1 ? false : true}>🗑️</button>
                   </div>
                 </div>
                 <hr />
