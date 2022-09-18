@@ -9,8 +9,7 @@ function NavComponent() {
         <nav>
             <Link className='link' to='/'>Home</Link> |
             <Link className='link' to='create-flashcard'>Create</Link> |
-            <Link className='link' to='review-flashcard'>Review</Link> |
-            <Link className='link' to='about'>About</Link> 
+            <Link className='link' to='review-flashcard'>Review</Link>
         </nav>
     </div>
   )
