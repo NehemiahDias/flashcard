@@ -1,10 +1,12 @@
 .create-deck-review {
     text-decoration: underline;
 }
+
 .create-deck-review:hover {
     cursor: pointer;
     text-decoration: none;
 }
+
 .all-decks {
     padding: 30px 70px;
     width: 100%;
@@ -12,32 +14,48 @@
     display: flex;
     flex-direction: column;
 }
+
 .full-deck {
     display: flex;
     width: 100%;
 }
+
 .delete-deck {
     height: 100%;
-    width: 100%;
-    background-color: #ff6347;
+    width: 50%;
     border-radius: 0 5px 5px 0;
     border: none;
-    box-shadow: rgba(0, 0, 0, 0.4) 3px 3px 5px;
-    font-size: 2.5rem;
+    background-color: #E495B5;
+    border-left: 2px solid black;
 }
+
+.update-deck {
+    border: none;
+    border-left: 2px solid black;
+    width: 50%;
+    height: 100%;
+    background-color: #E495B5;
+}
+
 .delete-deck:hover {
     cursor: pointer;
 }
+
 .delete-deck:active {
-    background-color: #e84b30;
     box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 3px;
 }
+
 .deck-action {
+    box-shadow: rgba(0, 0, 0, 0.4) 0 3px 5px;
+    display: flex;
+    align-items: center;
     width: 10%;
 }
+
 .edit-deck {
     color: black;
 }
+
 .deck {
     padding: 15px 30px;
     width: 90%;
@@ -49,10 +67,12 @@
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.4) -3px 3px 5px;
 }
+
 .deck:hover {
     cursor: pointer;
     background-color: #03806f;
 }
+
 .deck:active {
     box-shadow: rgba(0, 0, 0, 0.4) -1px 1px 3px;
 }
