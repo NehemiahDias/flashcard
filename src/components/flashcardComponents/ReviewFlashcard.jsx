@@ -116,7 +116,7 @@ function ReviewFlashcard() {
                     Finish Editing
                   </button>
                 ) : (
-                  <button className="update-deck" onClick={toggleEditDeck}>
+                  <button disabled={true} className="update-deck" onClick={toggleEditDeck}>
                     Edit
                   </button>
                 )}
