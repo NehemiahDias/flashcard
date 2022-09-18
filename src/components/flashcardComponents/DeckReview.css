@@ -1,0 +1,15 @@
+.showed-cards {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 50px 70px;
+}
+.flashcard-review{
+    width: 500px;
+    height: 300px;
+    background-color: var(--light);
+    border-radius: 5px;
+    border: none;
+}
