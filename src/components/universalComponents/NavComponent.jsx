@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function NavComponent() {
   return (
     <div className="navbar">
-        <h1>Flashcards!</h1>
+        <h1>The Deck</h1>
         <nav>
             <Link className='link' to='/'>Home</Link> |
             <Link className='link' to='create-flashcard'>Create</Link> |
