@@ -4,6 +4,7 @@
     align-items: center;
     padding: 30px 100px;
     height: 90vh;
+    gap: 40px;
 }
 .intro {
     width: 60%;
@@ -27,7 +28,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 20%;
+    height: 100%;
 }
 .start-now button {
     padding: 15px 30px;
@@ -37,6 +38,7 @@
     background-color: var(--accent);
     color: var(--dark);
     font-weight: bold;
+    margin-top: 20px;
 }
 .start-now button:hover {
     cursor: pointer;
@@ -44,4 +46,32 @@
 }
 .start-now button:active {
     box-shadow: none;
+}
+@media screen and (max-width: 650px){
+    .information {
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 30px 0;
+    }
+    .intro h1 {
+        font-size: 2rem;
+    }
+    .intro p {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 300px){
+    .intro {
+        width: 80%;
+    }
+    .intro h1 {
+        font-size: 1.5rem;
+    }
+    .intro p {
+        font-size: 14px;
+    }
+    .start-now {
+        width: 80%;
+    }
+    
 }
