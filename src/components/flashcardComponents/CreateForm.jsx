@@ -48,9 +48,10 @@ function CreateForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setDeck({...deck, deckCards: cards});
+    window.location.reload();
     setTimeout(() => {
       navigate('/review-flashcard')
-    }, 500)
+    }, 500);
   }
 
   useEffect(() => {
@@ -58,7 +59,6 @@ function CreateForm() {
       let currentStorage = localStorage.getItem('decks');
       if (currentStorage !== null){
         currentStorage = JSON.parse(currentStorage);
-        console.log(currentStorage)
         currentStorage = [...currentStorage, deck];
         localStorage.setItem('decks', JSON.stringify(currentStorage));
       } else {

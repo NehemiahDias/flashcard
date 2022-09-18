@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Route } from "react-router-dom";
 import "./Review.css";
 
 function ReviewFlashcard() {
@@ -53,7 +54,11 @@ function ReviewFlashcard() {
   };
 
   const toggleEditDeck = () => {
+    let isEditing = editDeck
     setEditDeck(editDeck ? false : true);
+    if (editDeck){
+      
+    }
   };
 
   return (
@@ -69,7 +74,7 @@ function ReviewFlashcard() {
         <div className="all-decks">
           {decks.map((deck, i) => (
             <div className="full-deck" key={i}>
-              <button onClick={() => navigate(`/review-deckname-${deck.deckName}`.split(' ').join('-'))} className="deck">
+              <button onClick={() => navigate(`/review-deckname-${deck.deckName}`.split(' ').join('-'))} className="deck" disabled={editDeck}>
                 <div className="deck-info">
                   {editDeck ? (
                     <>

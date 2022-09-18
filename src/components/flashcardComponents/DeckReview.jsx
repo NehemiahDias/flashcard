@@ -47,7 +47,17 @@ function DeckReview({ deck }) {
             className="flashcard-review"
             key={i}
           >
-            {val.showingAnswer ? <p>{val.definition}</p> : <p>{val.title}</p>}
+            {val.showingAnswer ? (
+              <>
+                <h4>Definition:</h4>
+                <p>{val.definition}</p>
+              </>
+            ) : (
+              <>
+                <h4>Title:</h4>
+                <p>{val.title}</p>
+              </>
+            )}
           </button>
         ))}
       </div>
