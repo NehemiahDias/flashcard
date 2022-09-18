@@ -1,9 +1,11 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './CreateForm.css';
 
 function CreateForm() {
+  const navigate = useNavigate();
   const initialState = {
     deckName: '',
     deckDescription: '',
@@ -44,7 +46,11 @@ function CreateForm() {
   }
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     setDeck({...deck, deckCards: cards});
+    setTimeout(() => {
+      navigate('/review-flashcard')
+    }, 500)
   }
 
   useEffect(() => {
@@ -64,7 +70,7 @@ function CreateForm() {
   return (
     <div className="create-deck">
       <h3 id='new-deck'>Create Deck</h3>
-      <form className='create-deck-form' onSubmit={handleSubmit}>
+      <form className='create-deck-form' onSubmit={handleSubmit} action='/review-flashcard'>
           <input 
               placeholder='Study Deck Title...'
               onChange={e => setDeck({...deck, deckName: e.target.value})}
