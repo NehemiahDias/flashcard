@@ -15,25 +15,39 @@
 .full-deck {
     display: flex;
     width: 100%;
-    background-color: var(--light);
 }
 .delete-deck {
     height: 100%;
     width: 100%;
+    background-color: #ff6347;
+    border-radius: 0 5px 5px 0;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.4) 3px 3px 5px;
+    font-size: 2.5rem;
+}
+.delete-deck:hover {
+    cursor: pointer;
+}
+.delete-deck:active {
+    background-color: #e84b30;
+    box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 3px;
 }
 .deck-action {
     width: 10%;
+}
+.edit-deck {
+    color: black;
 }
 .deck {
     padding: 15px 30px;
     width: 90%;
     background-color: var(--light);
-    border-radius: 5px;
+    border-radius: 5px 0 0 5px;
     border: none;
-    box-shadow: rgba(0, 0, 0, 0.4) -3px 3px 5px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.4) -3px 3px 5px;
 }
 .deck:hover {
     cursor: pointer;

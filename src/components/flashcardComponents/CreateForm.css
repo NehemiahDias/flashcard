@@ -5,7 +5,7 @@
 .create-deck h3 {
     margin-bottom: 30px;
 }
-form {
+.create-deck-form {
     display: flex;
     flex-direction: column;
     padding-bottom: 50px;

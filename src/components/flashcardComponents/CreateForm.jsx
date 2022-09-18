@@ -64,7 +64,7 @@ function CreateForm() {
   return (
     <div className="create-deck">
       <h3 id='new-deck'>Create Deck</h3>
-      <form onSubmit={handleSubmit}>
+      <form className='create-deck-form' onSubmit={handleSubmit}>
           <input 
               placeholder='Study Deck Title...'
               onChange={e => setDeck({...deck, deckName: e.target.value})}
