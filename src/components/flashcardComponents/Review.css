@@ -9,11 +9,51 @@
 } 
 .create-deck-review {
     text-decoration: underline;
+    margin-top: 20px;
 }
 
 .create-deck-review:hover {
     cursor: pointer;
     text-decoration: none;
+}
+
+.export-import-btns {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: fit-content;
+    gap: 20px;
+}
+
+.export-import-btns a, .export-import-btns label {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: bold;
+    background-color: var(--accent);
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) -2px 2px 3px;
+    padding: 5px 10px;
+}
+
+input[type='file'] {
+    display: none;
+}
+
+.export-import-btns a:hover, .export-import-btns label:hover {
+    cursor: pointer;
+}
+
+.export-import-btns a:active, .export-import-btns label:active {
+    box-shadow: rgba(0, 0, 0, 0.4) -1px 1px 2px;
+}
+
+.error-message {
+    margin-top: 10px;
+    color: rgb(249, 99, 99);
+    display: block;
+    text-align: center;
 }
 
 .all-decks {
@@ -101,6 +141,9 @@
     }
 }
 @media screen and (max-width: 400px){
+    .export-import-btns {
+        flex-direction: column;
+    }
     .deck-action{
         width: 40%;
     }

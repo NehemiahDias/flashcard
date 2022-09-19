@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CreateForm from './CreateForm';
 import './Create.css';
 
@@ -8,6 +8,13 @@ function CreateFlashcard() {
     const toggleCreateForm = () => {
         setCreateFlash(createFlash ? false : true);
     }
+
+    useEffect(() => {
+      if (localStorage.getItem('redirect') === 'true'){
+        window.location.reload();
+        localStorage.removeItem('redirect');
+      }
+    }, [])
 
     return (
       <section id="create-flashcard">
