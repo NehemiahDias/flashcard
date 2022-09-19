@@ -14,6 +14,7 @@
     font-weight: bold;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.4) -2px 2px 3px;
+    margin-top: 20px;
 }
 .shuffle-button:hover {
     cursor: pointer;
