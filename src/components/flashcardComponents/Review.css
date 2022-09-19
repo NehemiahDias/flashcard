@@ -26,7 +26,7 @@
     gap: 20px;
 }
 
-.export-import-btns p, .export-import-btns label {
+.export-import-btns a, .export-import-btns label {
     text-decoration: none;
     color: var(--dark);
     font-weight: bold;
@@ -41,11 +41,11 @@ input[type='file'] {
     display: none;
 }
 
-.export-import-btns p:hover, .export-import-btns label:hover {
+.export-import-btns a:hover, .export-import-btns label:hover {
     cursor: pointer;
 }
 
-.export-import-btns p:active, .export-import-btns label:active {
+.export-import-btns a:active, .export-import-btns label:active {
     box-shadow: rgba(0, 0, 0, 0.4) -1px 1px 2px;
 }
 

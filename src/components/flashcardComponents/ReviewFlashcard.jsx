@@ -60,7 +60,7 @@ function ReviewFlashcard() {
       encodeURIComponent(JSON.stringify(decks));
     var dlAnchorElem = document.getElementById("downloadAnchorElem");
     dlAnchorElem.setAttribute("href", dataStr);
-    dlAnchorElem.setAttribute("download", "scene.json");
+    dlAnchorElem.setAttribute("download", "decks.json");
   };
 
   const onRenderLoad = (e) => {
@@ -111,9 +111,10 @@ function ReviewFlashcard() {
         <div className="no-deck-information">
           <h1>You have not created any Decks!</h1>
           <div className="export-import-btns">
-            <p onClick={handleExport} id="downloadAnchorElem">
+            <a href={"data:text/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify(decks))} onClick={handleExport} id="downloadAnchorElem">
               Export Decks
-            </p>
+            </a>
             <label className="inport-btn">
               {" "}
               Import Decks
@@ -137,9 +138,10 @@ function ReviewFlashcard() {
       ) : (
         <>
           <div className="export-import-btns">
-            <p onClick={handleExport} id="downloadAnchorElem">
+            <a href={"data:text/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify(decks))} onClick={handleExport} id="downloadAnchorElem">
               Export Decks
-            </p>
+            </a>
             <label className="inport-btn">
               {" "}
               Import Decks
