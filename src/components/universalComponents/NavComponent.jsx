@@ -1,11 +1,13 @@
 import './Nav.css';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function NavComponent() {
+  const navigate = useNavigate();
+
   return (
     <div className="navbar">
-        <h1>The Deck</h1>
+        <h1 onClick={() => navigate('/')}>The Deck</h1>
         <nav>
             <Link className='link' to='/'>Create</Link> |
             <Link className='link' to='review-flashcard'>Review</Link>
