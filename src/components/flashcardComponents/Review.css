@@ -16,6 +16,37 @@
     text-decoration: none;
 }
 
+.export-import-btns {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: fit-content;
+    gap: 20px;
+}
+
+.export-import-btns a, .export-import-btns label {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: bold;
+    background-color: var(--accent);
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) -2px 2px 3px;
+    padding: 5px 10px;
+}
+
+input[type='file'] {
+    display: none;
+}
+
+.export-import-btns a:hover, .export-import-btns label:hover {
+    cursor: pointer;
+}
+
+.export-import-btns a:active, .export-import-btns label:active {
+    box-shadow: rgba(0, 0, 0, 0.4) -1px 1px 2px;
+}
+
 .all-decks {
     padding: 30px 0;
     width: 100%;

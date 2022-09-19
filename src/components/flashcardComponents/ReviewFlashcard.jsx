@@ -7,6 +7,7 @@ import writing from '../../resources/illustration-student-writing.png';
 function ReviewFlashcard() {
   const [decks, setDecks] = useState(null);
   const [editDeck, setEditDeck] = useState(false);
+  const [importedDeck, setImportedDeck] = useState()
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,6 +54,19 @@ function ReviewFlashcard() {
     );
   };
 
+  const handleExport = () => {
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(decks));
+    var dlAnchorElem = document.getElementById('downloadAnchorElem');
+    dlAnchorElem.setAttribute("href",     dataStr     );
+    dlAnchorElem.setAttribute("download", "scene.json");
+  }
+
+  const handleImportChange = (e) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    setImportedDeck(e.target.files[0]);
+  }
+
   const toggleEditDeck = () => {
     setEditDeck(editDeck ? false : true);
     if (editDeck){
@@ -65,12 +79,21 @@ function ReviewFlashcard() {
       {!decks ? (
         <div className="no-deck-information">
           <h1>You have not created any Decks!</h1>
+          <button>Export Decks</button>
+          <button>Import Decks</button>
           <Link to="/" className="create-deck-review">
             Click here to create One
           </Link>
           <img className="illustration-img" src={writing} alt='illustration of writing' />
         </div>
       ) : (
+        <>
+        <div className="export-import-btns">
+          <a onClick={handleExport} id="downloadAnchorElem" >Export Decks</a>
+          {/* <label className="inport-btn"> Import Decks
+            <input text='Import Decks' onChange={handleImportChange} type='file'/>
+          </label> */}
+        </div>
         <div className="all-decks">
           {decks.map((deck, i) => (
             <div className="full-deck" key={i}>
@@ -134,6 +157,7 @@ function ReviewFlashcard() {
             </div>
           ))}
         </div>
+        </>
       )}
     </section>
   );
