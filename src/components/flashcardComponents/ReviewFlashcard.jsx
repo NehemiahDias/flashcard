@@ -55,8 +55,11 @@ function ReviewFlashcard() {
   };
 
   const handleExport = () => {
-    var dataStr =
-      "data:text/json;charset=utf-8," +
+    if (decks === null){
+      setError('You must create a deck before exporting!')
+      return null;
+    }
+    var dataStr = "data:text/json;charset=utf-8," +
       encodeURIComponent(JSON.stringify(decks));
     var dlAnchorElem = document.getElementById("downloadAnchorElem");
     dlAnchorElem.setAttribute("href", dataStr);
