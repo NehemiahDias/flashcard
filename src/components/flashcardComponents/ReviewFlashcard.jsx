@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Route } from "react-router-dom";
 import "./Review.css";
+import writing from '../../resources/illustration-student-writing.png';
 
 function ReviewFlashcard() {
   const [decks, setDecks] = useState(null);
@@ -54,7 +54,6 @@ function ReviewFlashcard() {
   };
 
   const toggleEditDeck = () => {
-    let isEditing = editDeck
     setEditDeck(editDeck ? false : true);
     if (editDeck){
       
@@ -64,12 +63,13 @@ function ReviewFlashcard() {
   return (
     <section id="review-section">
       {!decks ? (
-        <>
-          <h1>You have no Created Decks</h1>
-          <Link to="/create-flashcard" className="create-deck-review">
+        <div className="no-deck-information">
+          <h1>You have not created any Decks!</h1>
+          <Link to="/" className="create-deck-review">
             Click here to create One
           </Link>
-        </>
+          <img className="illustration-img" src={writing} alt='illustration of writing' />
+        </div>
       ) : (
         <div className="all-decks">
           {decks.map((deck, i) => (

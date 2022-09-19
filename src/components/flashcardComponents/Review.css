@@ -1,3 +1,12 @@
+.no-deck-information {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+} 
 .create-deck-review {
     text-decoration: underline;
 }
@@ -72,6 +81,12 @@
 .deck:hover {
     cursor: pointer;
     background-color: #03806f;
+}
+
+.illustration-img {
+    max-width: 300px;
+    width: 50%;
+    display: block;
 }
 
 .deck:active {

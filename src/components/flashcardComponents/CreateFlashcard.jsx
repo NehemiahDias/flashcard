@@ -10,29 +10,33 @@ function CreateFlashcard() {
     }
 
     return (
-        <section id='create-flashcard'>
-            <div className="information">
-                <div className="intro">
-                    <h1>Create Your Own Flash Cards Free!</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia amet dignissimos odit voluptatem corrupti quidem molestiae, doloremque, eius, sit soluta excepturi deleniti praesentium beatae necessitatibus. Ad, iure. Consequatur, aliquam perspiciatis?</p>
-                </div>
-                <div className="start-now">
-                    <div className="cta">
-                        <p>Begin your studying journey for FREE!</p>
-                        <button onClick={() => {
-                            toggleCreateForm();
-                            setTimeout(() => {
-                                window.scrollTo(0, document.body.scrollHeight);
-                            }, 200)
-                        }}>CREATE DECK</button>
-                    </div>
-                </div>
+      <section id="create-flashcard">
+        <div className="information">
+          <div className="intro">
+            <h1>Create Your Own Flash Cards Free!</h1>
+            <p>
+                Creating study resources can be time consuming, expensive, and difficult. Not with The Deck! Time consuming? No, just click create, type the info, and done as easy as that! Expensive? Definitely not, The Deck is 100% free of charges and ads! Difficult? It's so easy, you don't even need to create an account! No emails, passwords, paywalls, ads! Completely hassle free, so what are you waiting for? Get Studying!
+            </p>
+          </div>
+          <div className="start-now">
+            <div className="cta">
+              <p>Begin your studying journey for FREE!</p>
+                <button
+                  onClick={() => {
+                    toggleCreateForm();
+                    setTimeout(() => {
+                      window.scrollTo(0, document.body.scrollHeight);
+                    }, 200);
+                  }}
+                >
+                  CREATE DECK
+                </button>
             </div>
-            { createFlash &&
-                <CreateForm />
-            }
-        </section>
-    )
+          </div>
+        </div>
+        {createFlash && <CreateForm toggleForm={toggleCreateForm} />}
+      </section>
+    );
 }
 
 export default CreateFlashcard
