@@ -60,6 +60,14 @@
         font-size: 16px;
     }
 }
+@media screen and (max-width: 400px) {
+    .intro h1 {
+        font-size: 1.7rem;
+    }
+    .intro p {
+        font-size: 14px;
+    }
+}
 @media screen and (max-width: 300px){
     .intro {
         width: 80%;
