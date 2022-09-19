@@ -9,6 +9,7 @@
 } 
 .create-deck-review {
     text-decoration: underline;
+    margin-top: 20px;
 }
 
 .create-deck-review:hover {
