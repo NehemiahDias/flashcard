@@ -6,6 +6,22 @@
 .deck-review-intro p {
     text-align: center;
 }
+.shuffle-button {
+    background-color: var(--accent);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--dark);
+    font-weight: bold;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.4) -2px 2px 3px;
+    margin-top: 20px;
+}
+.shuffle-button:hover {
+    cursor: pointer;
+}
+.shuffle-button:active {
+    box-shadow: rgba(0, 0, 0, 0.4) -1px -1px 2px;
+}
 .showed-cards {
     width: 100%;
     display: flex;
@@ -40,5 +56,15 @@
     }
     .deck-review-intro p {
         font-size: 14px;
+    }
+}
+@media screen and (max-width: 400px){
+    .deck-review-intro {
+        width: 70%;
+    }
+    .deck-info-review {
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 50px;
     }
 }
