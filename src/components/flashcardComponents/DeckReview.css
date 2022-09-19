@@ -42,3 +42,13 @@
         font-size: 14px;
     }
 }
+@media screen and (max-width: 400px){
+    .deck-review-intro {
+        width: 70%;
+    }
+    .deck-info-review {
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 50px;
+    }
+}
