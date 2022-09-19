@@ -37,6 +37,12 @@ function DeckReview({ deck }) {
     );
   };
 
+  const handleToggleAllCards = () => {
+    setShowedCards(showedCards.map(prev => {
+      return {...prev, showingAnswer: prev.showingAnswer ? false : true}
+    }))
+  }
+
   return (
     <>
       <div className="deck-review-intro">
@@ -54,6 +60,7 @@ function DeckReview({ deck }) {
         <h2>Deck Name: {deck.deckName}</h2>
         {deck.deckDescription && <p>Deck Description: {deck.deckDescription}</p>}
         <button className="shuffle-button" onClick={() => setShowedCards(shuffleCards())}>Shuffle</button>
+        <button className="change-shown-item" onClick={handleToggleAllCards}>Flip All Cards</button>
       </div>
       <div className="showed-cards">
         <p>Click the cards to flip!</p>
