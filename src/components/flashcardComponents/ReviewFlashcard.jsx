@@ -98,8 +98,12 @@ function ReviewFlashcard() {
                     <>
                       <p>Deck Name:</p>
                       <h3>{deck.deckName}</h3>
+                      {deck.deckDescription && 
+                      <>
                       <p>Deck Description:</p>
                       <h3>{deck.deckDescription}</h3>
+                      </>
+                      }
                       <p>Quantity of Flash Cards:</p>
                       <h3>{deck.deckCards.length}</h3>
                     </>
