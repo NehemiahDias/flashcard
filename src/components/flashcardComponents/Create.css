@@ -47,6 +47,14 @@
 .start-now button:active {
     box-shadow: none;
 }
+@media screen and (max-width: 750px){
+    .intro h1 {
+        font-size: 2.2rem;
+    }
+    .intro p {
+        font-size: 18px;
+    }
+}
 @media screen and (max-width: 650px){
     .information {
         flex-direction: column;
@@ -60,6 +68,11 @@
         font-size: 16px;
     }
 }
+@media screen and (max-width: 450px){
+    .intro p {
+        font-size: 15px;
+    }
+}
 @media screen and (max-width: 400px) {
     .intro h1 {
         font-size: 1.7rem;
@@ -68,7 +81,7 @@
         font-size: 14px;
     }
 }
-@media screen and (max-width: 300px){
+@media screen and (max-width: 360px){
     .intro {
         width: 80%;
     }
