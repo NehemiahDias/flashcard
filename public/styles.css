@@ -9,6 +9,7 @@
     box-sizing: border-box;
     color: #FFFCF9;
     scroll-behavior: smooth;
+    font-family: 'Hind Siliguri', sans-serif;
 }
 body, html {
     background-color: var(--dark);

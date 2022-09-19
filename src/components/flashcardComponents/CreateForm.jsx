@@ -4,8 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CreateForm.css';
 
-function CreateForm() {
-  const navigate = useNavigate();
+function CreateForm({toggleForm}) {
   const initialState = {
     deckName: '',
     deckDescription: '',
@@ -49,9 +48,6 @@ function CreateForm() {
     e.preventDefault();
     setDeck({...deck, deckCards: cards});
     window.location.reload();
-    setTimeout(() => {
-      navigate('/review-flashcard')
-    }, 500);
   }
 
   useEffect(() => {
@@ -72,13 +68,13 @@ function CreateForm() {
       <h3 id='new-deck'>Create Deck</h3>
       <form className='create-deck-form' onSubmit={handleSubmit} action='/review-flashcard'>
           <input 
-              placeholder='Study Deck Title...'
+              placeholder='Study Deck Title... *'
               onChange={e => setDeck({...deck, deckName: e.target.value})}
               className='deck-input'
               required
           />
           <textarea 
-            placeholder='Description...' 
+            placeholder='Description (optional)...' 
             onChange={e => setDeck({...deck, deckDescription: e.target.value})}
             className='deck-input' 
             rows='5'
@@ -121,7 +117,10 @@ function CreateForm() {
             const newId = cards[cards.length - 1].id + 1
             setCards([...cards, {title: '', definition: '', id: newId}])
           }}>+ Add Card</button>
-          <button className='submit' type='submit'>Submit</button>
+          <div className='creation-action-buttons'>
+            <button className='submit' type='submit'>Submit</button>
+            <button className='cancel-creation' type='button' onClick={toggleForm}>Cancel</button>
+          </div>
       </form>
     </div>
   )

@@ -7,8 +7,7 @@ function NavComponent() {
     <div className="navbar">
         <h1>The Deck</h1>
         <nav>
-            <Link className='link' to='/'>Home</Link> |
-            <Link className='link' to='create-flashcard'>Create</Link> |
+            <Link className='link' to='/'>Create</Link> |
             <Link className='link' to='review-flashcard'>Review</Link>
         </nav>
     </div>

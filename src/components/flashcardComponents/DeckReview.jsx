@@ -10,6 +10,7 @@ function DeckReview({ deck }) {
         return { ...val, showingAnswer: false };
       })
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleShowAnswer = (item) => {
@@ -36,11 +37,12 @@ function DeckReview({ deck }) {
           order. Happy studying!
         </p>
       </div>
-      <div className="deck-info">
-        <h1>{deck.deckName}</h1>
-        <p>{deck.deckDescription}</p>
+      <div className="deck-info-review">
+        <h2>Deck Name: {deck.deckName}</h2>
+        <p>Deck Description: {deck.deckDescription}</p>
       </div>
       <div className="showed-cards">
+        <p>Click the cards to flip!</p>
         {showedCards.map((val, i) => (
           <button
             onClick={() => handleShowAnswer(val)}
