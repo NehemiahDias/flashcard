@@ -98,6 +98,10 @@ function ReviewFlashcard() {
   const toggleEditDeck = () => {
     setEditDeck(editDeck ? false : true);
     if (editDeck) {
+      localStorage.setItem("redirect", true);
+      setTimeout(() => {
+        navigate("/");
+      }, 500);
     }
   };
 
@@ -107,9 +111,9 @@ function ReviewFlashcard() {
         <div className="no-deck-information">
           <h1>You have not created any Decks!</h1>
           <div className="export-import-btns">
-            <a onClick={handleExport} id="downloadAnchorElem">
+            <p onClick={handleExport} id="downloadAnchorElem">
               Export Decks
-            </a>
+            </p>
             <label className="inport-btn">
               {" "}
               Import Decks
@@ -133,9 +137,9 @@ function ReviewFlashcard() {
       ) : (
         <>
           <div className="export-import-btns">
-            <a onClick={handleExport} id="downloadAnchorElem">
+            <p onClick={handleExport} id="downloadAnchorElem">
               Export Decks
-            </a>
+            </p>
             <label className="inport-btn">
               {" "}
               Import Decks
@@ -205,7 +209,6 @@ function ReviewFlashcard() {
                     </button>
                   ) : (
                     <button
-                      disabled={true}
                       className="update-deck"
                       onClick={toggleEditDeck}
                     >
