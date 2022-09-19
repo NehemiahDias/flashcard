@@ -7,7 +7,7 @@ import writing from '../../resources/illustration-student-writing.png';
 function ReviewFlashcard() {
   const [decks, setDecks] = useState(null);
   const [editDeck, setEditDeck] = useState(false);
-  const [importedDeck, setImportedDeck] = useState()
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,10 +61,32 @@ function ReviewFlashcard() {
     dlAnchorElem.setAttribute("download", "scene.json");
   }
 
+  const onRenderLoad = (e) => {
+    console.log(e)
+    var obj = JSON.parse(e.target.result);
+    var existingDecks = [...decks];
+    var newList = [];
+    for (let i in obj){
+      if (existingDecks[i] === undefined && obj[i] !== undefined){
+        newList.push(obj[i]);
+      }
+    }
+    setDecks([...decks, ...newList]);
+    localStorage.setItem('redirect', true);
+    setTimeout(() => {
+      navigate('/')
+    }, 500);
+  }
+
   const handleImportChange = (e) => {
+    if (e.target.files[0].type !== 'application/json'){
+      setError('File must be a JSON file!');
+      return null;
+    }
     let reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    setImportedDeck(e.target.files[0]);
+    reader.onload = onRenderLoad;
+    reader.readAsText(e.target.files[0]);
+    setError("");
   }
 
   const toggleEditDeck = () => {
@@ -90,10 +112,13 @@ function ReviewFlashcard() {
         <>
         <div className="export-import-btns">
           <a onClick={handleExport} id="downloadAnchorElem" >Export Decks</a>
-          {/* <label className="inport-btn"> Import Decks
+          <label className="inport-btn"> Import Decks
             <input text='Import Decks' onChange={handleImportChange} type='file'/>
-          </label> */}
+          </label>
         </div>
+        {error && 
+            <p className="error-message">{error}</p>
+          }
         <div className="all-decks">
           {decks.map((deck, i) => (
             <div className="full-deck" key={i}>

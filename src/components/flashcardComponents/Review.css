@@ -18,6 +18,7 @@
 
 .export-import-btns {
     display: flex;
+    flex-wrap: wrap;
     margin: 0 auto;
     margin-top: 20px;
     width: fit-content;
@@ -45,6 +46,13 @@ input[type='file'] {
 
 .export-import-btns a:active, .export-import-btns label:active {
     box-shadow: rgba(0, 0, 0, 0.4) -1px 1px 2px;
+}
+
+.error-message {
+    margin-top: 10px;
+    color: rgb(249, 99, 99);
+    display: block;
+    text-align: center;
 }
 
 .all-decks {
