@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import './CreateForm.css';
 
-function CreateForm({toggleForm}) {
+function CreateForm({toggleForm, deckToEdit, submitEdit}) {
   const initialState = {
     deckName: '',
     deckDescription: '',
@@ -22,6 +22,14 @@ function CreateForm({toggleForm}) {
       }),
     );
   }
+
+  useEffect(() => {
+    if (deckToEdit){
+      console.log(deckToEdit)
+      setDeck(deckToEdit);
+      setCards(deckToEdit.deckCards)
+    }
+  }, [])
 
   const updateCardDefinition = (e, val) => {
     setCards(current =>
@@ -68,12 +76,14 @@ function CreateForm({toggleForm}) {
       <form className='create-deck-form' onSubmit={handleSubmit} action='/review-flashcard'>
           <input 
               placeholder='Study Deck Title... *'
+              value={deck.deckName}
               onChange={e => setDeck({...deck, deckName: e.target.value})}
               className='deck-input'
               required
           />
           <textarea 
             placeholder='Description (optional)...' 
+            value={deck.deckDescription}
             onChange={e => setDeck({...deck, deckDescription: e.target.value})}
             className='deck-input' 
             rows='5'
@@ -97,6 +107,7 @@ function CreateForm({toggleForm}) {
                   <input 
                     placeholder='Enter Term'
                     className='term' 
+                    value={card.title}
                     onChange={e => updateCardTitle(e, card)}
                     required
                   />
@@ -104,6 +115,7 @@ function CreateForm({toggleForm}) {
                   <input 
                     placeholder='Enter Definition'
                     onChange={e => updateCardDefinition(e, card)}
+                    value={card.definition}
                     className='def' 
                     required
                   />

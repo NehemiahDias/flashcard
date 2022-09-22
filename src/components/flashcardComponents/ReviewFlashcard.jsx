@@ -3,237 +3,256 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Review.css";
 import writing from "../../resources/illustration-student-writing.png";
+import CreateForm from './CreateForm'
 
 function ReviewFlashcard() {
-  const [decks, setDecks] = useState(null);
-  const [editDeck, setEditDeck] = useState(false);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+    const [decks, setDecks] = useState(null);
+    const [editDeck, setEditDeck] = useState(false);
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    let deck = localStorage.getItem("decks");
-    deck = JSON.parse(deck);
-    setDecks(deck);
-  }, []);
+    useEffect(() => {
+        let deck = localStorage.getItem("decks");
+        deck = JSON.parse(deck);
+        setDecks(deck);
+    }, []);
 
-  useEffect(() => {
-    if (!decks || decks === []) {
-      localStorage.removeItem("decks");
-    } else {
-      localStorage.setItem("decks", JSON.stringify(decks));
-    }
-  }, [decks]);
-
-  const handleDelete = (deckToDelete) => {
-    if (decks.length === 1) {
-      setDecks(null);
-    } else {
-      setDecks(decks.filter((prev) => prev !== deckToDelete));
-    }
-  };
-
-  const editDeckTitle = (e, val) => {
-    setDecks((current) =>
-      current.map((obj) => {
-        if (val === obj) {
-          return { ...obj, deckName: e.target.value };
+    useEffect(() => {
+        if (!decks || decks === []) {
+            localStorage.removeItem("decks");
+        } else {
+            localStorage.setItem("decks", JSON.stringify(decks));
         }
-        return obj;
-      })
-    );
-  };
+    }, [decks]);
 
-  const editDeckDescription = (e, val) => {
-    setDecks((current) =>
-      current.map((obj) => {
-        if (val === obj) {
-          return { ...obj, deckDescription: e.target.value };
+    const handleDelete = (deckToDelete) => {
+        if (decks.length === 1) {
+            setDecks(null);
+        } else {
+            setDecks(decks.filter((prev) => prev !== deckToDelete));
         }
-        return obj;
-      })
-    );
-  };
+    };
 
-  const handleExport = () => {
-    if (decks === null){
-      setError('You must create a deck before exporting!')
-      return null;
+    const editDeckTitle = (e, val) => {
+        setDecks((current) =>
+            current.map((obj) => {
+                if (val === obj) {
+                    return { ...obj, deckName: e.target.value };
+                }
+                return obj;
+            })
+        );
+    };
+
+    const submitEdit = (val) => {
+        setDecks(current => 
+            current.map(obj => {
+                if (val === obj){
+                    return {obj}
+                }
+            })
+            )
+        toggleEditDeck();
     }
-    var dataStr = "data:text/json;charset=utf-8," +
-      encodeURIComponent(JSON.stringify(decks));
-    var dlAnchorElem = document.getElementById("downloadAnchorElem");
-    dlAnchorElem.setAttribute("href", dataStr);
-    dlAnchorElem.setAttribute("download", "decks.json");
-  };
 
-  const onRenderLoad = (e) => {
-    var obj = JSON.parse(e.target.result);
-    if (decks === null) {
-      setDecks(obj);
-    } else {
-      var existingDecks = [...decks];
-      var newList = [];
-      for (let i in obj) {
-        if (existingDecks[i] === undefined && obj[i] !== undefined) {
-          newList.push(obj[i]);
+    const editDeckDescription = (e, val) => {
+        setDecks((current) =>
+            current.map((obj) => {
+                if (val === obj) {
+                    return { ...obj, deckDescription: e.target.value };
+                }
+                return obj;
+            })
+        );
+    };
+
+    const handleExport = () => {
+        if (decks === null) {
+            setError('You must create a deck before exporting!')
+            return null;
         }
-      }
-      setDecks([...decks, ...newList]);
-    }
+        var dataStr = "data:text/json;charset=utf-8," +
+            encodeURIComponent(JSON.stringify(decks));
+        var dlAnchorElem = document.getElementById("downloadAnchorElem");
+        dlAnchorElem.setAttribute("href", dataStr);
+        dlAnchorElem.setAttribute("download", "decks.json");
+    };
 
-    localStorage.setItem("redirect", true);
-    setTimeout(() => {
-      navigate("/");
-    }, 500);
-  };
+    const onRenderLoad = (e) => {
+        var obj = JSON.parse(e.target.result);
+        if (decks === null) {
+            setDecks(obj);
+        } else {
+            var existingDecks = [...decks];
+            var newList = [];
+            for (let i in obj) {
+                if (existingDecks[i] === undefined && obj[i] !== undefined) {
+                    newList.push(obj[i]);
+                }
+            }
+            setDecks([...decks, ...newList]);
+        }
 
-  const handleImportChange = (e) => {
-    if (e.target.files[0].type !== "application/json") {
-      setError("File must be a JSON file!");
-      return null;
-    }
-    let reader = new FileReader();
-    reader.onload = onRenderLoad;
-    reader.readAsText(e.target.files[0]);
-    setError("");
-  };
+        localStorage.setItem("redirect", true);
+        setTimeout(() => {
+            navigate("/");
+        }, 500);
+    };
 
-  const toggleEditDeck = () => {
-    setEditDeck(editDeck ? false : true);
-    if (editDeck) {
-      localStorage.setItem("redirect", true);
-      setTimeout(() => {
-        navigate("/");
-      }, 500);
-    }
-  };
+    const handleImportChange = (e) => {
+        if (e.target.files[0].type !== "application/json") {
+            setError("File must be a JSON file!");
+            return null;
+        }
+        let reader = new FileReader();
+        reader.onload = onRenderLoad;
+        reader.readAsText(e.target.files[0]);
+        setError("");
+    };
 
-  return (
-    <section id="review-section">
-      {!decks ? (
-        <div className="no-deck-information">
-          <h1>You have not created any Decks!</h1>
-          <div className="export-import-btns">
-            <a href={"data:text/json;charset=utf-8," +
-      encodeURIComponent(JSON.stringify(decks))} onClick={handleExport} id="downloadAnchorElem">
-              Export Decks
-            </a>
-            <label className="inport-btn">
-              {" "}
-              Import Decks
-              <input
-                text="Import Decks"
-                onChange={handleImportChange}
-                type="file"
-              />
-            </label>
-          </div>
-          {error && <p className="error-message">{error}</p>}
-          <Link to="/" className="create-deck-review">
-            Click here to create One
-          </Link>
-          <img
-            className="illustration-img"
-            src={writing}
-            alt="illustration of writing"
-          />
-        </div>
-      ) : (
-        <>
-          <div className="export-import-btns">
-            <a href={"data:text/json;charset=utf-8," +
-      encodeURIComponent(JSON.stringify(decks))} onClick={handleExport} id="downloadAnchorElem">
-              Export Decks
-            </a>
-            <label className="inport-btn">
-              {" "}
-              Import Decks
-              <input
-                text="Import Decks"
-                onChange={handleImportChange}
-                type="file"
-              />
-            </label>
-          </div>
-          {error && <p className="error-message">{error}</p>}
-          <div className="all-decks">
-            {decks.map((deck, i) => (
-              <div className="full-deck" key={i}>
-                <button
-                  onClick={() =>
-                    navigate(
-                      `/review-deckname-${deck.deckName}`.split(" ").join("-")
-                    )
-                  }
-                  className="deck"
-                  disabled={editDeck}
-                >
-                  <div className="deck-info">
-                    {editDeck ? (
-                      <>
-                        <p>Deck Name:</p>
-                        <input
-                          className="edit-deck"
-                          value={deck.deckName}
-                          onChange={(e) => editDeckTitle(e, deck)}
-                          min="1"
-                        />
-                        <p>Deck Description:</p>
-                        <input
-                          className="edit-deck"
-                          value={deck.deckDescription}
-                          onChange={(e) => editDeckDescription(e, deck)}
-                        />
-                        <p>Quantity of Flash Cards:</p>
-                        <h3>{deck.deckCards.length}</h3>
-                      </>
-                    ) : (
-                      <>
-                        <p>Deck Name:</p>
-                        <h3>{deck.deckName}</h3>
-                        {deck.deckDescription && (
-                          <>
-                            <p>Deck Description:</p>
-                            <h3>{deck.deckDescription}</h3>
-                          </>
-                        )}
-                        <p>Quantity of Flash Cards:</p>
-                        <h3>{deck.deckCards.length}</h3>
-                      </>
-                    )}
-                  </div>
-                </button>
-                <div className="deck-action">
-                  {editDeck ? (
-                    <button
-                      className="update-deck"
-                      onClick={toggleEditDeck}
-                      disabled={deck.deckName.length < 1}
-                    >
-                      Finish Editing
-                    </button>
-                  ) : (
-                    <button
-                      className="update-deck"
-                      onClick={toggleEditDeck}
-                    >
-                      Edit
-                    </button>
-                  )}
-                  <button
-                    className="delete-deck"
-                    onClick={() => handleDelete(deck)}
-                  >
-                    Delete
-                  </button>
+    const toggleEditDeck = () => {
+        setEditDeck(editDeck ? false : true);
+        if (editDeck) {
+          localStorage.setItem("redirect", true);
+          setTimeout(() => {
+            navigate("/");
+          }, 500);
+        }
+    };
+
+    return (
+        <section id="review-section">
+            {!decks ? (
+                <div className="no-deck-information">
+                    <h1>You have not created any Decks!</h1>
+                    <div className="export-import-btns">
+                        <a href={"data:text/json;charset=utf-8," +
+                            encodeURIComponent(JSON.stringify(decks))} onClick={handleExport} id="downloadAnchorElem">
+                            Export Decks
+                        </a>
+                        <label className="inport-btn">
+                            {" "}
+                            Import Decks
+                            <input
+                                text="Import Decks"
+                                onChange={handleImportChange}
+                                type="file"
+                            />
+                        </label>
+                    </div>
+                    {error && <p className="error-message">{error}</p>}
+                    <Link to="/" className="create-deck-review">
+                        Click here to create One
+                    </Link>
+                    <img
+                        className="illustration-img"
+                        src={writing}
+                        alt="illustration of writing"
+                    />
                 </div>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-    </section>
-  );
+            ) : (
+                <>
+                    <div className="export-import-btns">
+                        <a href={"data:text/json;charset=utf-8," +
+                            encodeURIComponent(JSON.stringify(decks))} onClick={handleExport} id="downloadAnchorElem">
+                            Export Decks
+                        </a>
+                        <label className="inport-btn">
+                            {" "}
+                            Import Decks
+                            <input
+                                text="Import Decks"
+                                onChange={handleImportChange}
+                                type="file"
+                            />
+                        </label>
+                    </div>
+                    {error && <p className="error-message">{error}</p>}
+                    <div className="all-decks">
+                        {decks.map((deck, i) => (
+                            <>
+                            <div className="full-deck" key={i}>
+                                <button
+                                    onClick={() =>
+                                        navigate(
+                                            `/review-deckname-${deck.deckName}`.split(" ").join("-")
+                                        )
+                                    }
+                                    className="deck"
+                                    disabled={editDeck}
+                                >
+                                    <div className="deck-info">
+                                        {editDeck ? (
+                                            <>
+                                                <p>Deck Name:</p>
+                                                <input
+                                                    className="edit-deck"
+                                                    value={deck.deckName}
+                                                    onChange={(e) => editDeckTitle(e, deck)}
+                                                    min="1"
+                                                />
+                                                <p>Deck Description:</p>
+                                                <input
+                                                    className="edit-deck"
+                                                    value={deck.deckDescription}
+                                                    onChange={(e) => editDeckDescription(e, deck)}
+                                                />
+                                                <p>Quantity of Flash Cards:</p>
+                                                <h3>{deck.deckCards.length}</h3>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <p>Deck Name:</p>
+                                                <h3>{deck.deckName}</h3>
+                                                {deck.deckDescription && (
+                                                    <>
+                                                        <p>Deck Description:</p>
+                                                        <h3>{deck.deckDescription}</h3>
+                                                    </>
+                                                )}
+                                                <p>Quantity of Flash Cards:</p>
+                                                <h3>{deck.deckCards.length}</h3>
+                                            </>
+                                        )}
+                                    </div>
+                                </button>
+                                <div className="deck-action">
+                                    {editDeck ? (
+                                        <button
+                                            className="update-deck"
+                                            onClick={toggleEditDeck}
+                                            disabled={deck.deckName.length < 1}
+                                        >
+                                            Finish Editing
+                                        </button>
+                                    ) : (
+                                        <button
+                                            className="update-deck"
+                                            onClick={toggleEditDeck}
+                                        >
+                                            Edit
+                                        </button>
+                                    )}
+                                    <button
+                                        className="delete-deck"
+                                        onClick={() => handleDelete(deck)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            {editDeck &&
+                                <CreateForm submitEdit={submitEdit} deckToEdit={deck} toggleForm={toggleEditDeck} />
+                            }
+                            </>
+                        ))}
+                        
+                    </div>
+                </>
+            )}
+        </section>
+    );
 }
 
 export default ReviewFlashcard;
