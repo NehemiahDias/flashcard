@@ -67,6 +67,10 @@
     margin-top: 50px;
     text-align: center;
 }
+.back-to-top {
+    text-align: center;
+    padding: 10px 0;
+}
 @media screen and (max-width: 650px){
     .deck-review-intro h1 {
         font-size: 1.7rem;

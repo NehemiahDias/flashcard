@@ -3,7 +3,6 @@ import "./DeckReview.css";
 
 function DeckReview({ deck }) {
   const [showedCards, setShowedCards] = useState([...deck.deckCards]);
-  const [editing, setEditing] = useState(false);
 
   const shuffleCards = () => {
     let newList = [...showedCards];
@@ -38,36 +37,10 @@ function DeckReview({ deck }) {
     );
   };
 
-  const toggleEdit = () => {
-    setEditing(editing ? false : true);
-  }
-
   const handleToggleAllCards = () => {
     setShowedCards(showedCards.map(prev => {
       return { ...prev, showingAnswer: prev.showingAnswer ? false : true }
     }))
-  }
-
-  const editCardTitle = (e, card) => {
-    setShowedCards(curr => 
-      curr.map(obj => {
-        if (obj === card){
-          return {...obj, title: e.target.value}
-        }
-        return obj
-      })
-    )
-  }
-
-  const editCardDefinition = (e, card) => {
-    setShowedCards(curr => 
-      curr.map(obj => {
-        if (obj === card){
-          return {...obj, definition: e.target.value}
-        }
-        return obj
-      })  
-    )
   }
 
   return (
@@ -91,35 +64,12 @@ function DeckReview({ deck }) {
       </div>
       <div className="showed-cards">
         <p>Click the cards to flip!</p>
-        {editing ?
-          <button onClick={toggleEdit}>Finish Editing</button>
-          :
-          <button onClick={toggleEdit}>Edit Cards</button>
-        }
         {showedCards.map((val) => (
           <button
-            disabled={editing}
             onClick={() => handleShowAnswer(val)}
             className="flashcard-review"
             key={Math.random()}
           >
-            {editing ?
-              <>
-                <h4>Title:</h4>
-                <input 
-                  style={{color: 'black'}} 
-                  value={val.title} 
-                  onChange={e => editCardTitle(e, val)} 
-                />
-                <h4>Definition:</h4>
-                <input 
-                  style={{color: 'black'}} 
-                  value={val.definition} 
-                  onChange={e => editCardDefinition(e, val)} 
-                />
-              </>
-              :
-              <>
               {
                 val.showingAnswer ? (
                   <>
@@ -133,10 +83,11 @@ function DeckReview({ deck }) {
                   </>
                 )
               }
-              </>
-            }
           </button>
         ))}
+      </div>
+      <div className="back-to-top">
+        <a href='#'>Back to top</a>
       </div>
     </>
   );
