@@ -87,7 +87,7 @@ function DeckReview({ deck }) {
         ))}
       </div>
       <div className="back-to-top">
-        <a href='#'>Back to top</a>
+        <button className="back-to-top" onClick={() => window.scrollTo(0, 0)}>Back To Top</button>
       </div>
     </>
   );

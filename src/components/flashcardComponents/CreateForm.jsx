@@ -29,6 +29,7 @@ function CreateForm({toggleForm, deckToEdit, submitEdit}) {
       setDeck(deckToEdit);
       setCards(deckToEdit.deckCards)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const updateCardDefinition = (e, val) => {
