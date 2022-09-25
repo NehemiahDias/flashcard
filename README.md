@@ -1,4 +1,5 @@
-# Flashcard Website App [LIVE LINK](https://thedeck.netlify.app/)
+# Flashcard Website App 
+## [LIVE LINK](https://thedeck.netlify.app/)
 
 ## Problem
 I made this site for a client who needed a flashcard system that's free because they didn't like Quizlet. 
@@ -20,5 +21,12 @@ The decks that you create are initially saved in LocalStorage and can be exporte
 
 ## Future Plans
 This project has grabbed more interest than I expected. Originally started to help a client study, I have plans to make the site better for sure! User authentication so the info persists accross devices is going to be a huge focus of mine. Later, I definitely plan on adding other ways to study such as: matching title to definition, filling in blanks, and an overall better flashcard experience. 
+
+## Technology Used
+- ReactJS
+- HTML
+- CSS
+- localStorage
+- React Router
 
 If you have any ideas, I would love to hear them so feel free to create a new issue or even contribute to this project!
