@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Review.css";
 import writing from "../../resources/illustration-student-writing.png";
-import CreateForm from './CreateForm'
+import EditDeck from "./EditDeck";
 
 function ReviewFlashcard() {
     const [decks, setDecks] = useState(null);
@@ -43,17 +43,6 @@ function ReviewFlashcard() {
             })
         );
     };
-
-    const submitEdit = (val) => {
-        setDecks(current => 
-            current.map(obj => {
-                if (val === obj){
-                    return {obj}
-                }
-            })
-            )
-        toggleEditDeck();
-    }
 
     const editDeckDescription = (e, val) => {
         setDecks((current) =>
@@ -112,12 +101,6 @@ function ReviewFlashcard() {
 
     const toggleEditDeck = () => {
         setEditDeck(editDeck ? false : true);
-        if (editDeck) {
-          localStorage.setItem("redirect", true);
-          setTimeout(() => {
-            navigate("/");
-          }, 500);
-        }
     };
 
     return (
@@ -170,84 +153,81 @@ function ReviewFlashcard() {
                     {error && <p className="error-message">{error}</p>}
                     <div className="all-decks">
                         {decks.map((deck, i) => (
-                            <>
-                            <div className="full-deck" key={i}>
-                                <button
-                                    onClick={() =>
-                                        navigate(
-                                            `/review-deckname-${deck.deckName}`.split(" ").join("-")
-                                        )
-                                    }
-                                    className="deck"
-                                    disabled={editDeck}
-                                >
-                                    <div className="deck-info">
-                                        {editDeck ? (
-                                            <>
-                                                <p>Deck Name:</p>
-                                                <input
-                                                    className="edit-deck"
-                                                    value={deck.deckName}
-                                                    onChange={(e) => editDeckTitle(e, deck)}
-                                                    min="1"
-                                                />
-                                                <p>Deck Description:</p>
-                                                <input
-                                                    className="edit-deck"
-                                                    value={deck.deckDescription}
-                                                    onChange={(e) => editDeckDescription(e, deck)}
-                                                />
-                                                <p>Quantity of Flash Cards:</p>
-                                                <h3>{deck.deckCards.length}</h3>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <p>Deck Name:</p>
-                                                <h3>{deck.deckName}</h3>
-                                                {deck.deckDescription && (
-                                                    <>
-                                                        <p>Deck Description:</p>
-                                                        <h3>{deck.deckDescription}</h3>
-                                                    </>
-                                                )}
-                                                <p>Quantity of Flash Cards:</p>
-                                                <h3>{deck.deckCards.length}</h3>
-                                            </>
-                                        )}
-                                    </div>
-                                </button>
-                                <div className="deck-action">
-                                    {editDeck ? (
-                                        <button
-                                            className="update-deck"
-                                            onClick={toggleEditDeck}
-                                            disabled={deck.deckName.length < 1}
-                                        >
-                                            Finish Editing
-                                        </button>
-                                    ) : (
-                                        <button
-                                            className="update-deck"
-                                            onClick={toggleEditDeck}
-                                        >
-                                            Edit
-                                        </button>
-                                    )}
+                                <div className="full-deck" key={i}>
                                     <button
-                                        className="delete-deck"
-                                        onClick={() => handleDelete(deck)}
+                                        onClick={() =>
+                                            navigate(
+                                                `/review-deckname-${deck.deckName}`.split(" ").join("-")
+                                            )
+                                        }
+                                        className="deck"
+                                        disabled={editDeck}
                                     >
-                                        Delete
+                                        <div className="deck-info">
+                                            {editDeck ? (
+                                                <>
+                                                    <p>Deck Name:</p>
+                                                    <input
+                                                        className="edit-deck"
+                                                        value={deck.deckName}
+                                                        onChange={(e) => editDeckTitle(e, deck)}
+                                                        min="1"
+                                                    />
+                                                    <p>Deck Description:</p>
+                                                    <input
+                                                        className="edit-deck"
+                                                        value={deck.deckDescription}
+                                                        onChange={(e) => editDeckDescription(e, deck)}
+                                                    />
+                                                    <p>Quantity of Flash Cards:</p>
+                                                    <h3>{deck.deckCards.length}</h3>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <p>Deck Name:</p>
+                                                    <h3>{deck.deckName}</h3>
+                                                    {deck.deckDescription && (
+                                                        <>
+                                                            <p>Deck Description:</p>
+                                                            <h3>{deck.deckDescription}</h3>
+                                                        </>
+                                                    )}
+                                                    <p>Quantity of Flash Cards:</p>
+                                                    <h3>{deck.deckCards.length}</h3>
+                                                </>
+                                            )}
+                                        </div>
                                     </button>
+                                    <div className="deck-action">
+                                        {editDeck ? (
+                                            <button
+                                                className="update-deck"
+                                                onClick={toggleEditDeck}
+                                                disabled={deck.deckName.length < 1}
+                                            >
+                                                Finish Editing
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className="update-deck"
+                                                onClick={toggleEditDeck}
+                                            >
+                                                Edit
+                                            </button>
+                                        )}
+                                        <button
+                                            className="delete-deck"
+                                            onClick={() => handleDelete(deck)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                {editDeck &&
+                                    <EditDeck deck={deck} setDecks={setDecks} decks={decks} toggleEdit={toggleEditDeck} />
+                                }
                                 </div>
-                                
-                            </div>
-                            {editDeck &&
-                                <CreateForm submitEdit={submitEdit} deckToEdit={deck} toggleForm={toggleEditDeck} />
-                            }
-                            </>
                         ))}
-                        
+
                     </div>
                 </>
             )}
