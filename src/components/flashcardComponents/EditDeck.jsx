@@ -39,6 +39,15 @@ const EditDeck = ({deck, setDecks, toggleEdit, deckToEdit}) => {
             )
     }
 
+    const handleDeleteCard = cardToDelete => {
+        setCards(current => current.filter(val => {
+          if (val !== cardToDelete){
+            return val;
+          }
+          return null;
+        }))
+      }
+
     const handleSubmit = e => {
         e.preventDefault();
         setDecks(curr => 
@@ -85,7 +94,7 @@ const EditDeck = ({deck, setDecks, toggleEdit, deckToEdit}) => {
                                     <p>{index + 1}</p>
                                 </div>
                                 <div className="delete">
-                                    <button className='delete-icon' type='button' onClick={null} disabled={cards.length > 1 ? false : true}>🗑️</button>
+                                    <button className='delete-icon' type='button' onClick={() => handleDeleteCard(card)} disabled={cards.length > 1 ? false : true}>🗑️</button>
                                 </div>
                             </div>
                             <hr />
