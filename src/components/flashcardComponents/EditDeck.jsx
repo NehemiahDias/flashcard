@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const EditDeck = ({deck, decks, setDecks, toggleEdit}) => {
+const EditDeck = ({deck, setDecks, toggleEdit, deckToEdit}) => {
     const [importedDeck, setImportedDeck] = useState(deck);
     const [cards, setCards] = useState(deck.deckCards);
     const navigate = useNavigate();
+    let style;
+
+    if (deck !== deckToEdit){
+        style = {display: 'none'}
+    }
 
     useEffect(() => {
         setImportedDeck({...importedDeck, deckCards: cards})
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cards])
 
     const handleCardTitleChange = (e, card) => {
@@ -40,6 +46,7 @@ const EditDeck = ({deck, decks, setDecks, toggleEdit}) => {
                 if (obj === deck){
                     return importedDeck;
                 }
+                return obj
             })
             )
             toggleEdit();
@@ -50,7 +57,7 @@ const EditDeck = ({deck, decks, setDecks, toggleEdit}) => {
     }
 
     return (
-        <div className="create-deck">
+        <div className="edit-deck" style={style}>
             <h3 id='new-deck'>Edit Deck</h3>
             <form className='create-deck-form' onSubmit={handleSubmit} action='/review-flashcard'>
                 <input

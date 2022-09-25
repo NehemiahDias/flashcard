@@ -8,6 +8,7 @@ import EditDeck from "./EditDeck";
 function ReviewFlashcard() {
     const [decks, setDecks] = useState(null);
     const [editDeck, setEditDeck] = useState(false);
+    const [deckToEdit, setDeckToEdit] = useState(null);
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
@@ -31,28 +32,6 @@ function ReviewFlashcard() {
         } else {
             setDecks(decks.filter((prev) => prev !== deckToDelete));
         }
-    };
-
-    const editDeckTitle = (e, val) => {
-        setDecks((current) =>
-            current.map((obj) => {
-                if (val === obj) {
-                    return { ...obj, deckName: e.target.value };
-                }
-                return obj;
-            })
-        );
-    };
-
-    const editDeckDescription = (e, val) => {
-        setDecks((current) =>
-            current.map((obj) => {
-                if (val === obj) {
-                    return { ...obj, deckDescription: e.target.value };
-                }
-                return obj;
-            })
-        );
     };
 
     const handleExport = () => {
@@ -99,8 +78,11 @@ function ReviewFlashcard() {
         setError("");
     };
 
-    const toggleEditDeck = () => {
+    const toggleEditDeck = (deck) => {
         setEditDeck(editDeck ? false : true);
+        if (deck){
+            setDeckToEdit(deck);
+        }
     };
 
     return (
@@ -153,6 +135,7 @@ function ReviewFlashcard() {
                     {error && <p className="error-message">{error}</p>}
                     <div className="all-decks">
                         {decks.map((deck, i) => (
+                            <>
                                 <div className="full-deck" key={i}>
                                     <button
                                         onClick={() =>
@@ -164,25 +147,6 @@ function ReviewFlashcard() {
                                         disabled={editDeck}
                                     >
                                         <div className="deck-info">
-                                            {editDeck ? (
-                                                <>
-                                                    <p>Deck Name:</p>
-                                                    <input
-                                                        className="edit-deck"
-                                                        value={deck.deckName}
-                                                        onChange={(e) => editDeckTitle(e, deck)}
-                                                        min="1"
-                                                    />
-                                                    <p>Deck Description:</p>
-                                                    <input
-                                                        className="edit-deck"
-                                                        value={deck.deckDescription}
-                                                        onChange={(e) => editDeckDescription(e, deck)}
-                                                    />
-                                                    <p>Quantity of Flash Cards:</p>
-                                                    <h3>{deck.deckCards.length}</h3>
-                                                </>
-                                            ) : (
                                                 <>
                                                     <p>Deck Name:</p>
                                                     <h3>{deck.deckName}</h3>
@@ -195,7 +159,6 @@ function ReviewFlashcard() {
                                                     <p>Quantity of Flash Cards:</p>
                                                     <h3>{deck.deckCards.length}</h3>
                                                 </>
-                                            )}
                                         </div>
                                     </button>
                                     <div className="deck-action">
@@ -205,12 +168,12 @@ function ReviewFlashcard() {
                                                 onClick={toggleEditDeck}
                                                 disabled={deck.deckName.length < 1}
                                             >
-                                                Finish Editing
+                                                Cancel
                                             </button>
                                         ) : (
                                             <button
                                                 className="update-deck"
-                                                onClick={toggleEditDeck}
+                                                onClick={() => toggleEditDeck(deck)}
                                             >
                                                 Edit
                                             </button>
@@ -222,10 +185,12 @@ function ReviewFlashcard() {
                                             Delete
                                         </button>
                                     </div>
-                                {editDeck &&
-                                    <EditDeck deck={deck} setDecks={setDecks} decks={decks} toggleEdit={toggleEditDeck} />
-                                }
+                                
                                 </div>
+                                {editDeck &&
+                                    <EditDeck deck={deck} setDecks={setDecks} toggleEdit={toggleEditDeck} deckToEdit={deckToEdit} />
+                                }
+                                </>
                         ))}
 
                     </div>
