@@ -39,7 +39,7 @@ function DeckReview({ deck }) {
 
   const handleToggleAllCards = () => {
     setShowedCards(showedCards.map(prev => {
-      return {...prev, showingAnswer: prev.showingAnswer ? false : true}
+      return { ...prev, showingAnswer: prev.showingAnswer ? false : true }
     }))
   }
 
@@ -70,19 +70,24 @@ function DeckReview({ deck }) {
             className="flashcard-review"
             key={Math.random()}
           >
-            {val.showingAnswer ? (
-              <>
-                <h4>Definition:</h4>
-                <p>{val.definition}</p>
-              </>
-            ) : (
-              <>
-                <h4>Title:</h4>
-                <p>{val.title}</p>
-              </>
-            )}
+              {
+                val.showingAnswer ? (
+                  <>
+                    <h4>Definition:</h4>
+                    <p>{val.definition}</p>
+                  </>
+                ) : (
+                  <>
+                    <h4>Title:</h4>
+                    <p>{val.title}</p>
+                  </>
+                )
+              }
           </button>
         ))}
+      </div>
+      <div className="back-to-top">
+        <button className="back-to-top" onClick={() => window.scrollTo(0, 0)}>Back To Top</button>
       </div>
     </>
   );

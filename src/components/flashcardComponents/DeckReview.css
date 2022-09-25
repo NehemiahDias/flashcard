@@ -67,6 +67,16 @@
     margin-top: 50px;
     text-align: center;
 }
+.back-to-top {
+    text-align: center;
+    background: none;
+    border: none;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+.back-to-top:hover {
+    cursor: pointer;
+}
 @media screen and (max-width: 650px){
     .deck-review-intro h1 {
         font-size: 1.7rem;

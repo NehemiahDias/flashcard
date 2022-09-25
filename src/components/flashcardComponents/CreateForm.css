@@ -1,4 +1,4 @@
-.create-deck {
+.create-deck, .edit-deck {
     width: 100%;
     padding: 50px 100px;
 }
@@ -166,7 +166,7 @@ hr {
     box-shadow: none;
 }
 @media screen and (max-width: 500px) {
-    .create-deck {
+    .create-deck, .edit-deck {
         padding: 0;
         width: 80%;
         margin: 0 auto;
