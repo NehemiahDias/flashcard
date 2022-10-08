@@ -10,7 +10,8 @@ function NavComponent() {
         <h1 onClick={() => navigate('/')}>The Deck</h1>
         <nav>
             <Link className='link' to='/'>Create</Link> |
-            <Link className='link' to='review-flashcard'>Review</Link>
+            <Link className='link' to='review-flashcard'>Review</Link> |
+            <Link className='link' to='sign-in'>Sign In</Link>
         </nav>
     </div>
   )
