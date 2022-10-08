@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import './CreateForm.css';
 
-function CreateForm({toggleForm, deckToEdit, submitEdit}) {
+function CreateForm({toggleForm, deckToEdit}) {
   const initialState = {
     deckName: '',
     deckDescription: '',

@@ -10,6 +10,7 @@ const Profile = () => {
             <h1>You are now signed in</h1>
             <div className="user-info">
                 <p>Email: {user.email}</p>
+                <p>Created flashcards: 0</p>
                 <div className="user-controls">
                     <button onClick={logout} className='sign-out-btn' type='button'>Sign Out</button>
                     <button className='delete-acc-btn' type='button'>Delete Account</button>
