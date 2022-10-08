@@ -1,9 +1,14 @@
+import { ref, set } from 'firebase/database';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { db } from '../../firebase-config';
 import './CreateForm.css';
+import {UserAuth} from '../context/AuthContext';
+import {uuidv4} from '@firebase/util';
 
 function CreateForm({toggleForm, deckToEdit}) {
+  const {user} = UserAuth();
   const initialState = {
     deckName: '',
     deckDescription: '',
@@ -29,6 +34,7 @@ function CreateForm({toggleForm, deckToEdit}) {
       setDeck(deckToEdit);
       setCards(deckToEdit.deckCards)
     }
+    console.log(user)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -52,9 +58,11 @@ function CreateForm({toggleForm, deckToEdit}) {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setDeck({...deck, deckCards: cards});
+    const uuid = uuidv4();
+    // setDeck({...deck, deckCards: cards});
+    await set(ref(db, `users/${user.uid}/decks/${uuid}`), {...deck, deckCards: cards, uuid})
     window.location.reload();
   }
 

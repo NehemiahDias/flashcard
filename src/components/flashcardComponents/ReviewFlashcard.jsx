@@ -4,19 +4,33 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Review.css";
 import writing from "../../resources/illustration-student-writing.png";
 import EditDeck from "./EditDeck";
+import { onValue, ref } from "firebase/database";
+import { db } from "../../firebase-config";
+import { UserAuth } from "../context/AuthContext";
 
 function ReviewFlashcard() {
+    const {user} = UserAuth();
     const [decks, setDecks] = useState(null);
     const [editDeck, setEditDeck] = useState(false);
     const [deckToEdit, setDeckToEdit] = useState(null);
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
+    const fetchData = async () => {
+        const decksRef = ref(db, `users/${user.uid}/decks`);
+        onValue(decksRef, snapshot => {
+            const data = snapshot.val();
+            
+            setDecks(Object.values(data))
+        })
+    }
+
     useEffect(() => {
+        fetchData();
         let deck = localStorage.getItem("decks");
         deck = JSON.parse(deck);
-        setDecks(deck);
-    }, []);
+        // setDecks(deck);
+    }, [user]);
 
     useEffect(() => {
         if (!decks || decks === []) {
