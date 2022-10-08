@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './SignIn.css';
 
 const SignIn = () => {
@@ -37,8 +38,8 @@ const SignIn = () => {
             </div>
             <div className='user-actions'>
                 <button type='submit' className='sign-in-btn'>Sign In</button>
-                <button type='button' className='link-to-signup'>Don't have an account? Sign Up</button>
-                <button type='button' className='link-to-forgotpw'>Forgot Password?</button>
+                <Link to='/sign-up' className='link-to-signup'>Don't have an account? Sign Up</Link>
+                <Link to='/forgot-pass' className='link-to-forgotpw'>Forgot Password?</Link>
             </div>
         </form>
     </div>

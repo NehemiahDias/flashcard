@@ -61,7 +61,8 @@
     gap: 10px;
     margin-top: 10px;
 }
-.user-actions button {
+.user-actions button, .user-actions a {
+    margin: 0 auto;
     color: black;
 }
 .sign-in-btn {
