@@ -5,6 +5,7 @@ import CreateFlashcard from "./components/flashcardComponents/CreateFlashcard";
 import ReviewFlashcard from "./components/flashcardComponents/ReviewFlashcard";
 import DeckReview from "./components/flashcardComponents/DeckReview";
 import SignIn from "./components/signInComponents/SignIn";
+import SignUp from "./components/signUpComponents/SignUp";
 
 function App() {
   const [decks, setDecks] = useState(null);
@@ -22,6 +23,7 @@ function App() {
         <Route path='/' element={<CreateFlashcard/>}/>
         <Route path='/review-flashcard' element={<ReviewFlashcard/>}/>
         <Route path='/sign-in' element={<SignIn />}/>
+        <Route path='/sign-up' element={<SignUp />}/>
         {decks && 
           decks.map(deck => {
             let path = `/review-deckname-${deck.deckName}`.split(' ').join('-');
