@@ -1,11 +1,10 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import './SignIn.css';
 
-const SignIn = () => {
+const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const handleSignIn = e => {
         e.preventDefault();
@@ -13,7 +12,7 @@ const SignIn = () => {
 
     return (
         <div className='sign-in-container'>
-            <h1>Sign In</h1>
+            <h1>Sign Up</h1>
             <form onSubmit={handleSignIn}>
                 <div className='input-field'>
                     <label htmlFor='email'>Enter Email:</label>
@@ -36,14 +35,24 @@ const SignIn = () => {
                         required
                     />
                 </div>
+                <div className='input-field'>
+                    <label htmlFor='confirm-password'>Confirm Password:</label>
+                    <input
+                        id='confirm-password'
+                        type='password'
+                        placeholder='Confirm Password...'
+                        onChange={e => setConfirmPassword(e.target.value)}
+                        min='3'
+                        required
+                    />
+                </div>
                 <div className='user-actions'>
-                    <button type='submit' className='sign-in-btn'>Sign In</button>
-                    <Link to='/sign-up' className='link-to-signup'>Don't have an account? Sign Up</Link>
-                    <Link to='/forgot-pass' className='link-to-forgotpw'>Forgot Password?</Link>
+                    <button type='submit' className='sign-in-btn'>Sign Up</button>
+                    <Link to='/sign-in' className='link-to-signup'>Already have and account? Sign In</Link>
                 </div>
             </form>
         </div>
     )
 }
 
-export default SignIn
+export default SignUp
