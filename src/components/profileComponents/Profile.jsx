@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { UserAuth } from '../context/AuthContext';
 import './Profile.css';
 

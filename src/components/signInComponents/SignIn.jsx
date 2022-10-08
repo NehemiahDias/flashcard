@@ -1,8 +1,6 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase-config';
 import { UserAuth } from '../context/AuthContext';
 import './SignIn.css';
 
