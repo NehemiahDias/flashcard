@@ -7,6 +7,8 @@ import DeckReview from "./components/flashcardComponents/DeckReview";
 import SignIn from "./components/signInComponents/SignIn";
 import SignUp from "./components/signUpComponents/SignUp";
 import { AuthContextProvider } from "./components/context/AuthContext";
+import Profile from "./components/profileComponents/Profile";
+import ProtectedRoute from "./components/context/ProtectedRoute";
 
 function App() {
   const [decks, setDecks] = useState(null);
@@ -26,6 +28,7 @@ function App() {
           <Route path='/review-flashcard' element={<ReviewFlashcard/>}/>
           <Route path='/sign-in' element={<SignIn />}/>
           <Route path='/sign-up' element={<SignUp />}/>
+          <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>}/>
           {decks && 
             decks.map(deck => {
               let path = `/review-deckname-${deck.deckName}`.split(' ').join('-');

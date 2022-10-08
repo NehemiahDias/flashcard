@@ -11,7 +11,7 @@ function NavComponent() {
         <nav>
             <Link className='link' to='/'>Create</Link> |
             <Link className='link' to='review-flashcard'>Review</Link> |
-            <Link className='link' to='sign-in'>Sign In</Link>
+            <Link className='link' to='profile'>Profile</Link>
         </nav>
     </div>
   )

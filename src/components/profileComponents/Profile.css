@@ -1,0 +1,27 @@
+.profile-container {
+    text-align: center;
+}
+.user-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.sign-out-btn {
+    background-color: var(--accent);
+    outline: none;
+    border: 2px solid black;
+    padding: 10px 15px;
+    color: black;
+}
+.delete-acc-btn {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid rgb(224, 115, 115);
+    padding: 10px 15px;
+    color: rgb(224, 115, 115);
+}
+.delete-acc-btn:hover, .sign-out-btn:hover {
+    cursor: pointer;
+}
