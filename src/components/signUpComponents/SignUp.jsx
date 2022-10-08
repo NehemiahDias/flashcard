@@ -1,19 +1,39 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { getAuth, sendEmailVerification } from 'firebase/auth';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserAuth } from '../context/AuthContext';
 
 const SignUp = () => {
+    const navigate = useNavigate();
+    const {createUser} = UserAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
 
-    const handleSignIn = e => {
+    const handleSignUp = async e => {
         e.preventDefault();
+        if (password !== confirmPassword){
+            setError('Passwords do not match');
+            setTimeout(() => {
+                setError('');
+            }, 3000)
+            return;
+        }
+        try {
+            await createUser(email, password);
+            const auth = getAuth();
+            await sendEmailVerification(auth.currentUser);
+            navigate('/profile')
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     return (
         <div className='sign-in-container'>
             <h1>Sign Up</h1>
-            <form onSubmit={handleSignIn}>
+            <form onSubmit={handleSignUp}>
                 <div className='input-field'>
                     <label htmlFor='email'>Enter Email:</label>
                     <input
@@ -48,8 +68,9 @@ const SignUp = () => {
                 </div>
                 <div className='user-actions'>
                     <button type='submit' className='sign-in-btn'>Sign Up</button>
-                    <Link to='/sign-in' className='link-to-signup'>Already have and account? Sign In</Link>
+                    <Link to='/sign-in' className='link-to-signup'>Already have an account? Sign In</Link>
                 </div>
+                {error && <p className='error-msg'>{error}</p>}
             </form>
         </div>
     )

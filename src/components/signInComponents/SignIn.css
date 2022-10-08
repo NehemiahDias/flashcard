@@ -72,3 +72,9 @@
     border-radius: 50px;
     padding: 10px 15px;
 }
+.sign-in-btn:hover {
+    cursor: pointer;
+}
+.error-msg {
+    color: rgb(146, 0, 0);
+}

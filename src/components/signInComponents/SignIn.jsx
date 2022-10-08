@@ -1,14 +1,27 @@
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase-config';
+import { UserAuth } from '../context/AuthContext';
 import './SignIn.css';
 
 const SignIn = () => {
+    const navigate = useNavigate();
+    const {signIn} = UserAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-    const handleSignIn = e => {
+    const handleSignIn = async e => {
         e.preventDefault();
+        try {
+            await signIn(email, password);
+            navigate('/profile');
+        } catch (e) {
+            setError(e.message);
+            console.log(e.message);
+        }
     }
 
     return (
@@ -41,6 +54,7 @@ const SignIn = () => {
                     <Link to='/sign-up' className='link-to-signup'>Don't have an account? Sign Up</Link>
                     <Link to='/forgot-pass' className='link-to-forgotpw'>Forgot Password?</Link>
                 </div>
+                {error && <p className='error-msg'>{error}</p>}
             </form>
         </div>
     )
