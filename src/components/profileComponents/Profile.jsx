@@ -6,10 +6,6 @@ import './Profile.css';
 const Profile = () => {
     const { user, logout } = UserAuth();
 
-    useEffect(() => {
-        console.log(user)
-    }, [user])
-
     return (
         <div className='profile-container'>
             <h1>You are now signed in</h1>
