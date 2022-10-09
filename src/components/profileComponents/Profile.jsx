@@ -12,7 +12,7 @@ const Profile = () => {
     const [deleteAcc, setDeleteAcc] = useState(false);
     const { user, logout } = UserAuth();
 
-    const fetchData = () => {
+    const fetchData = async () => {
         const decksRef = ref(db, `users/${user.uid}/decks`);
         onValue(decksRef, async snapshot => {
             const data = await snapshot.val();
