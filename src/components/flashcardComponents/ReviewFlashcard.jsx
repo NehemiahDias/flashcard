@@ -30,10 +30,11 @@ function ReviewFlashcard() {
 
     useEffect(() => {
         
-        let deck = localStorage.getItem("decks");
-        deck = JSON.parse(deck);
+        // let deck = localStorage.getItem("decks");
+        // deck = JSON.parse(deck);
         // setDecks(deck);
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     useEffect(() => {
