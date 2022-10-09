@@ -1,4 +1,4 @@
-import { onValue, ref, set } from 'firebase/database';
+import { ref, set } from 'firebase/database';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase-config';
