@@ -8,6 +8,7 @@ import { onValue, ref, set } from "firebase/database";
 import { db } from "../../firebase-config";
 import { UserAuth } from "../context/AuthContext";
 import { uuidv4 } from "@firebase/util";
+import LoadingScreen from 'react-loading-screen';
 
 function ReviewFlashcard() {
     const {user} = UserAuth();
@@ -15,22 +16,24 @@ function ReviewFlashcard() {
     const [editDeck, setEditDeck] = useState(false);
     const [deckToEdit, setDeckToEdit] = useState(null);
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     const fetchData = async () => {
         const decksRef = ref(db, `users/${user.uid}/decks`);
-        onValue(decksRef, snapshot => {
-            const data = snapshot.val();
-            
+        onValue(decksRef, async snapshot => {
+            const data = await snapshot.val();
             setDecks(Object.values(data))
         })
+        setLoading(false);
     }
 
     useEffect(() => {
-        fetchData();
+        
         let deck = localStorage.getItem("decks");
         deck = JSON.parse(deck);
         // setDecks(deck);
+        fetchData();
     }, [user]);
 
     useEffect(() => {
@@ -114,6 +117,13 @@ function ReviewFlashcard() {
     };
 
     return (
+        <LoadingScreen
+            loading={loading}
+            bgColor='#0F4C5C'
+            textColor='#fffff'
+            text='Loading...'
+            spinnerColor='#000'
+        >
         <section id="review-section">
             {!decks ? (
                 <div className="no-deck-information">
@@ -225,6 +235,7 @@ function ReviewFlashcard() {
                 </>
             )}
         </section>
+        </LoadingScreen>
     );
 }
 
