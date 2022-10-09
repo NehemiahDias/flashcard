@@ -1,15 +1,20 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { UserAuth } from '../context/AuthContext';
+import google from '../../resources/google-logo-png-open-2000.png'
 import './SignIn.css';
 
 const SignIn = () => {
     const navigate = useNavigate();
-    const {signIn} = UserAuth();
+    const auth = getAuth();
+    const {signIn, signInWithGoogle, redirectResult} = UserAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const provider = new GoogleAuthProvider();
+    redirectResult(auth)
 
     const handleSignIn = async e => {
         e.preventDefault();
@@ -20,6 +25,11 @@ const SignIn = () => {
             setError(e.message);
             console.log(e.message);
         }
+    }
+
+    const handleGoogleSignIn = async () => {
+        await signInWithGoogle(auth, provider);
+        navigate('/profile');
     }
 
     return (
@@ -49,6 +59,9 @@ const SignIn = () => {
                 </div>
                 <div className='user-actions'>
                     <button type='submit' className='sign-in-btn'>Sign In</button>
+                    <button type='button' onClick={handleGoogleSignIn} className='google-sign-in'>
+                        <img src={google} alt='google' />
+                    </button>
                     <Link to='/sign-up' className='link-to-signup'>Don't have an account? Sign Up</Link>
                     <Link to='/forgot-pass' className='link-to-forgotpw'>Forgot Password?</Link>
                 </div>

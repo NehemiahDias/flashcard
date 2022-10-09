@@ -4,14 +4,17 @@ import {
     signInWithEmailAndPassword,
     signOut,
     updateProfile,
-    onAuthStateChanged
+    onAuthStateChanged,
+    signInWithRedirect,
+    getRedirectResult,
+    GoogleAuthProvider
 } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 
 const UserContext = createContext();
 
 export const AuthContextProvider = ({children}) => {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({});
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
@@ -31,6 +34,25 @@ export const AuthContextProvider = ({children}) => {
         return signOut(auth);
     }
 
+    const signInWithGoogle = (auth, provider) => {
+        signInWithRedirect(auth, provider);
+    }
+
+    const redirectResult = async auth => {
+        return await getRedirectResult(auth)
+            .then(result => {
+                const credential = GoogleAuthProvider.credentialFromResult(result)
+                if (result.user === null){
+                    setUser({})
+                } else {
+                    setUser(result.user);
+                }
+                window.location.href = 'http://localhost:3000/profile'
+            }).catch(e => {
+                console.error(e);
+            })
+    }
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
@@ -42,7 +64,7 @@ export const AuthContextProvider = ({children}) => {
     }, [])
 
     return (
-        <UserContext.Provider value={{createUser, user, logout, signIn, updateUsername}}>
+        <UserContext.Provider value={{createUser, user, logout, signIn, updateUsername, signInWithGoogle, redirectResult}}>
             {children}
         </UserContext.Provider>
     )

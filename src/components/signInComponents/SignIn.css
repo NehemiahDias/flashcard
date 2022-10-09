@@ -73,6 +73,25 @@
     border-radius: 50px;
     padding: 10px 15px;
 }
+.google-sign-in {
+    background-color: white;
+    display: flex;
+    margin: 0 auto;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    border: none;
+    justify-content: space-evenly;
+}
+.google-sign-in:hover {
+    cursor: pointer;
+}
+.google-sign-in span {
+    color: black;
+}
+.google-sign-in img {
+    width: 20px;
+}
 .sign-in-btn:hover {
     cursor: pointer;
 }
