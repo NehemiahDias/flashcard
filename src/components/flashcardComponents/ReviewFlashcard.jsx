@@ -4,9 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Review.css";
 import writing from "../../resources/illustration-student-writing.png";
 import EditDeck from "./EditDeck";
-import { onValue, ref } from "firebase/database";
+import { onValue, ref, set } from "firebase/database";
 import { db } from "../../firebase-config";
 import { UserAuth } from "../context/AuthContext";
+import { uuidv4 } from "@firebase/util";
 
 function ReviewFlashcard() {
     const {user} = UserAuth();
@@ -40,7 +41,10 @@ function ReviewFlashcard() {
         }
     }, [decks]);
 
-    const handleDelete = (deckToDelete) => {
+    const handleDelete = async (deckToDelete) => {
+        if (deckToDelete.uuid){
+            await set(ref(db, `users/${user.uid}/decks/${deckToDelete.uuid}`), null);
+        }
         if (decks.length === 1) {
             setDecks(null);
         } else {
@@ -60,8 +64,18 @@ function ReviewFlashcard() {
         dlAnchorElem.setAttribute("download", "decks.json");
     };
 
-    const onRenderLoad = (e) => {
+    const onRenderLoad = async (e) => {
         var obj = JSON.parse(e.target.result);
+        const uuid = uuidv4();
+        await obj.map(item => {
+            if (!item.uuid) {
+                set(ref(db, `users/${user.uid}/decks/${uuid}`), {...item, uuid})
+                return {...item, uuid}
+            }
+            set(ref(db, `users/${user.uid}/decks/${item.uuid}`), item)
+            return item
+        })
+
         if (decks === null) {
             setDecks(obj);
         } else {
