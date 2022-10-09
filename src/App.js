@@ -25,7 +25,7 @@ function App() {
         <NavComponent />
         <Routes>
           <Route path='/' element={<CreateFlashcard/>}/>
-          <Route path='/review-flashcard' element={<ReviewFlashcard/>}/>
+          <Route path='/review-flashcard' element={<ProtectedRoute><ReviewFlashcard/></ProtectedRoute>}/>
           <Route path='/sign-in' element={<SignIn />}/>
           <Route path='/sign-up' element={<SignUp />}/>
           <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>}/>

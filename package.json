@@ -1,6 +1,9 @@
 {
   "name": "flashcard",
-  "author": "Nehemiah Dias",
+  "author": {
+    "name": "Nehemiah Dias",
+    "url": "https://ndias.info"
+  },
   "version": "1.0.0",
   "private": true,
   "dependencies": {

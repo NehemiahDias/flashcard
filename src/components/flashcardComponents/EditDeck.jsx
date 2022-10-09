@@ -1,7 +1,11 @@
+import { onValue, ref, set } from 'firebase/database';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { db } from '../../firebase-config';
+import { UserAuth } from '../context/AuthContext';
 
 const EditDeck = ({deck, setDecks, toggleEdit, deckToEdit}) => {
+    const {user} = UserAuth();
     const [importedDeck, setImportedDeck] = useState(deck);
     const [cards, setCards] = useState(deck.deckCards);
     const navigate = useNavigate();
@@ -39,7 +43,7 @@ const EditDeck = ({deck, setDecks, toggleEdit, deckToEdit}) => {
             )
     }
 
-    const handleDeleteCard = cardToDelete => {
+    const handleDeleteCard = async cardToDelete => {
         setCards(current => current.filter(val => {
           if (val !== cardToDelete){
             return val;
@@ -48,8 +52,9 @@ const EditDeck = ({deck, setDecks, toggleEdit, deckToEdit}) => {
         }))
       }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
+        await set(ref(db, `users/${user.uid}/decks/${deck.uuid}`), importedDeck);
         setDecks(curr => 
             curr.map(obj => {
                 if (obj === deck){

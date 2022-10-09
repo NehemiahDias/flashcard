@@ -26,7 +26,8 @@ This project has grabbed more interest than I expected. Originally started to he
 - ReactJS
 - HTML
 - CSS
-- localStorage
 - React Router
+- Firebase (Authentication)
+- Firebase (Realtime Database)
 
 If you have any ideas, I would love to hear them so feel free to create a new issue or even contribute to this project!
