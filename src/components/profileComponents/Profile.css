@@ -23,7 +23,9 @@
     background-color: rgba(0, 0, 0, 0.2);
     border: 2px solid rgb(224, 115, 115);
     padding: 10px 15px;
+    border-radius: 5px;
     color: rgb(224, 115, 115);
+    box-shadow: rgba(0, 0, 0, 0.4) -2px 2px 3px;
 }
 .delete-acc-btn:hover, .sign-out-btn:hover {
     cursor: pointer;
