@@ -4,12 +4,16 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { db } from '../../firebase-config';
 import { UserAuth } from '../context/AuthContext';
+import ChangeEmail from './ChangeEmail';
+import ChangePassword from './ChangePassword';
 import DeleteProfile from './DeleteProfile';
 import './Profile.css';
 
 const Profile = () => {
     const [createdDecks, setCreatedDecks] = useState(0);
     const [deleteAcc, setDeleteAcc] = useState(false);
+    const [passSettings, setPassSettings] = useState(false);
+    const [emailSettings, setEmailSettings] = useState(false);
     const { user, logout } = UserAuth();
 
     const fetchData = async () => {
@@ -18,6 +22,14 @@ const Profile = () => {
             const data = await snapshot.val();
             setCreatedDecks(Object.values(data).length)
         })
+    }
+
+    const togglePassword = () => {
+        setPassSettings(!passSettings);
+    }
+
+    const toggleEmail = () => {
+        setEmailSettings(!emailSettings);
     }
 
     const toggleDelete = () => {
@@ -38,8 +50,14 @@ const Profile = () => {
                 <p>Created flashcards: {createdDecks}</p>
                 <div className="user-controls">
                     <button onClick={logout} className='sign-out-btn' type='button'>Sign Out</button>
-                    <button onClick={toggleDelete} className='delete-acc-btn' type='button'>Delete Account</button>
                 </div>
+                <div className="user-controls">
+                    <h3>Manage Accounts</h3>
+                    <button onClick={togglePassword} className='change-pass-btn'>Change Password</button>
+                    <button onClick={toggleEmail} className='change-email-btn'>Change Email</button>
+                </div>
+                {passSettings && <ChangePassword user={user} />}
+                {emailSettings && <ChangeEmail user={user} />}
             </div>
         </div>
     )
