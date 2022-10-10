@@ -16,21 +16,30 @@ function ReviewFlashcard(props) {
     let deck = localStorage.getItem("decks");
     deck = JSON.parse(deck);
     setDecks(deck);
+    // props.setAppDeck(deck);
   }, []);
 
-  useEffect(() => {
-    if (!decks || decks === []) {
-      localStorage.removeItem("decks");
-    } else {
-      localStorage.setItem("decks", JSON.stringify(decks));
-    }
-  }, [decks]);
+  // useEffect(() => {
+  //   if (!decks || decks === []) {
+  //     localStorage.removeItem("decks");
+  //   } else {
+  //     localStorage.setItem("decks", JSON.stringify(decks));
+  //   }
+  // }, [decks]);
 
   const handleDelete = (deckToDelete) => {
+    // if (decks.length === 1) {
+    //   setDecks(null);
+    // }
     if (decks.length === 1) {
       setDecks(null);
+      localStorage.clear();
     } else {
       setDecks(decks.filter((prev) => prev !== deckToDelete));
+      const newArray = JSON.stringify(
+        decks.filter((prev) => prev !== deckToDelete)
+      );
+      localStorage.setItem("decks", newArray);
     }
   };
 
@@ -51,19 +60,25 @@ function ReviewFlashcard(props) {
     var obj = JSON.parse(e.target.result);
     if (decks === null) {
       setDecks(obj);
+      props.setAppDeck(obj);
+      localStorage.setItem("decks", JSON.stringify(obj));
     } else {
       var existingDecks = [...decks];
       var newList = [];
       for (let i in obj) {
-        if (existingDecks[i] === undefined && obj[i] !== undefined) {
+        if (obj[i] !== undefined) {
           newList.push(obj[i]);
         }
       }
       setDecks([...decks, ...newList]);
-      props.setAppDecks(...props.appDecks, [...decks, ...newList]);
+      props.setAppDeck([...decks, ...newList]);
+      const newArray = [...decks];
+      newArray.push(...newList);
+
+      localStorage.setItem("decks", JSON.stringify(newArray));
     }
 
-    localStorage.setItem("redirect", true);
+    // localStorage.setItem("redirect", true);
     // setTimeout(() => {
     //     navigate("/");
     // }, 500);
@@ -76,6 +91,8 @@ function ReviewFlashcard(props) {
     }
     let reader = new FileReader();
     reader.onload = onRenderLoad;
+
+    // onRenderLoad(e);
     reader.readAsText(e.target.files[0]);
     setError("");
   };
@@ -150,10 +167,19 @@ function ReviewFlashcard(props) {
               <>
                 <div className="full-deck" key={i}>
                   <button
-                    onClick={() =>
-                      navigate(
-                        `/review-deckname-${deck.deckName}`.split(" ").join("-")
-                      )
+                    onClick={
+                      () =>
+                        navigate(
+                          `/review-deckname-${deck.deckName}`
+                            .split(" ")
+                            .join("-")
+                        )
+                      // navigate(
+                      //   `/review-deckname/${deck.deckName
+                      //     .split(" ")
+                      //     .join("-")}`,
+                      //   { state: { deck } }
+                      // )
                     }
                     className="deck"
                     disabled={editDeck}>
@@ -200,6 +226,8 @@ function ReviewFlashcard(props) {
                     setDecks={setDecks}
                     toggleEdit={toggleEditDeck}
                     deckToEdit={deckToEdit}
+                    decks={decks}
+                    index={i}
                   />
                 )}
               </>

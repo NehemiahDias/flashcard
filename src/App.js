@@ -8,11 +8,16 @@ import DeckReview from "./components/flashcardComponents/DeckReview";
 function App() {
   const [decks, setDecks] = useState(null);
 
+  let tempDecks;
+
   useEffect(() => {
-    let tempDecks = localStorage.getItem('decks');
+    tempDecks = localStorage.getItem('decks');
     tempDecks = JSON.parse(tempDecks);
     setDecks(tempDecks);
   }, [])
+
+
+
 
   return (
     <BrowserRouter>

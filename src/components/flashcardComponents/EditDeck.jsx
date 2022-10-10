@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const EditDeck = ({ deck, setDecks, toggleEdit, deckToEdit }) => {
+const EditDeck = ({ decks, deck, setDecks, toggleEdit, deckToEdit, index }) => {
   const [importedDeck, setImportedDeck] = useState(deck);
   const [cards, setCards] = useState(deck.deckCards);
   const navigate = useNavigate();
@@ -60,10 +60,15 @@ const EditDeck = ({ deck, setDecks, toggleEdit, deckToEdit }) => {
       })
     );
     toggleEdit();
-    localStorage.setItem("redirect", true);
+    // localStorage.setItem("redirect", true);
     // setTimeout(() => {
     //     navigate("/");
     // }, 500);
+
+    decks.splice(index, 1);
+    setCards(decks.splice(index, 0, importedDeck));
+
+    localStorage.setItem("decks", JSON.stringify([...decks]));
   };
 
   return (
