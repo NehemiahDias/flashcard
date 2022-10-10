@@ -1,3 +1,4 @@
+import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import './ChangePassword.css';
 
@@ -6,9 +7,32 @@ const ChangePassword = ({ user, cancel }) => {
     const [newPass, setNewPass] = useState('');
     const [confirmNewPass, setConfirmNewPass] = useState('');
     const [error, setError] = useState('');
-
-    const handleChangePass = e => {
+    
+    const handleChangePass = async e => {
         e.preventDefault();
+        if (newPass !== confirmNewPass){
+            setError('New passwords do not match!');
+            return;
+        }
+        var cred = EmailAuthProvider.credential(user.email, oldPass);
+
+        if (user.providerData[0].providerId === 'google.com' && user.providerData.length < 2){
+            await updatePassword(user, newPass)
+                .then(() => {
+                    cancel();
+                })
+                .catch(e => {
+                    console.error(e);
+                })
+        } else {
+            await reauthenticateWithCredential(user, cred).then(() => {
+                updatePassword(user, newPass)
+            }).then(() => {
+                cancel()
+            }).catch(e => {
+                console.error(e);
+            })
+        }
     }
 
     return (
@@ -16,13 +40,17 @@ const ChangePassword = ({ user, cancel }) => {
             <h2>Change Password</h2>
             <form onSubmit={handleChangePass}>
                 <div className="input-container">
-                    <label htmlFor='current-pass'>Current Password:</label>
-                    <input
-                        id='current-pass'
-                        type='password'
-                        onChange={e => setOldPass(e.target.value)}
-                        required
-                    />
+                    { user.providerData[0].providerId !== 'google.com' || user.providerData.length > 1 &&
+                    <>
+                        <label htmlFor='current-pass'>Current Password:</label>
+                        <input
+                            id='current-pass'
+                            type='password'
+                            onChange={e => setOldPass(e.target.value)}
+                            required
+                        />
+                    </>
+                    }
                 </div>
                 <div className="input-container">
                     <label htmlFor='new-pass'>New Password:</label>
