@@ -57,7 +57,7 @@ const Profile = () => {
                     <button onClick={toggleEmail} className='change-email-btn'>Change Email</button>
                 </div>
                 {passSettings && <ChangePassword cancel={togglePassword} user={user} />}
-                {emailSettings && <ChangeEmail user={user} />}
+                {emailSettings && <ChangeEmail cancel={toggleEmail} user={user} />}
             </div>
         </div>
     )

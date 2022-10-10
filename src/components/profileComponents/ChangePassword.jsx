@@ -22,7 +22,7 @@ const ChangePassword = ({ user, cancel }) => {
                     cancel();
                 })
                 .catch(e => {
-                    console.error(e);
+                    setError(e.message)
                 })
         } else {
             await reauthenticateWithCredential(user, cred).then(() => {
@@ -30,7 +30,7 @@ const ChangePassword = ({ user, cancel }) => {
             }).then(() => {
                 cancel()
             }).catch(e => {
-                console.error(e);
+                setError(e.message)
             })
         }
     }
@@ -70,7 +70,7 @@ const ChangePassword = ({ user, cancel }) => {
                         required
                     />
                 </div>
-                {error && <p className='error-msg'>{error}</p>}
+                {error && <p className='error-msg-prof'>{error}</p>}
                 <div className="edit-action-btns">
                     <button type='submit' className='confirm-changes'>Confirm Changes</button>
                     <button onClick={cancel} type='button' className='cancel-changes'>Cancel</button>
