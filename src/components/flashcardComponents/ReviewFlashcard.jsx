@@ -16,23 +16,34 @@ function ReviewFlashcard() {
     const [editDeck, setEditDeck] = useState(false);
     const [deckToEdit, setDeckToEdit] = useState(null);
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const fetchData = async () => {
         const decksRef = ref(db, `users/${user.uid}/decks`);
+        let deck = localStorage.getItem("decks");
+        deck = JSON.parse(deck);
+
         onValue(decksRef, async snapshot => {
             const data = await snapshot.val();
             setDecks(Object.values(data))
         })
+        
+        if(deck && !deck[0].uuid){
+            await deck.map(item => {
+                const uuid = uuidv4();
+                if (!item.uuid) {
+                    set(ref(db, `users/${user.uid}/decks/${uuid}`), {...item, uuid})
+                    return {...item, uuid}
+                }
+                set(ref(db, `users/${user.uid}/decks/${item.uuid}`), item)
+                return item
+            })
+        }
         setLoading(false);
     }
 
     useEffect(() => {
-        
-        // let deck = localStorage.getItem("decks");
-        // deck = JSON.parse(deck);
-        // setDecks(deck);
         fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
@@ -70,8 +81,8 @@ function ReviewFlashcard() {
 
     const onRenderLoad = async (e) => {
         var obj = JSON.parse(e.target.result);
-        const uuid = uuidv4();
-        await obj.map(item => {
+        obj = await obj.map(item => {
+            const uuid = uuidv4();
             if (!item.uuid) {
                 set(ref(db, `users/${user.uid}/decks/${uuid}`), {...item, uuid})
                 return {...item, uuid}
