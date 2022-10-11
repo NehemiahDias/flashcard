@@ -1,6 +1,5 @@
 import { ref, set } from 'firebase/database';
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase-config';
 import { UserAuth } from '../context/AuthContext';
 
@@ -8,7 +7,6 @@ const EditDeck = ({deck, setDecks, toggleEdit, deckToEdit}) => {
     const {user} = UserAuth();
     const [importedDeck, setImportedDeck] = useState(deck);
     const [cards, setCards] = useState(deck.deckCards);
-    const navigate = useNavigate();
     let style;
 
     if (deck !== deckToEdit){
@@ -64,10 +62,6 @@ const EditDeck = ({deck, setDecks, toggleEdit, deckToEdit}) => {
             })
             )
             toggleEdit();
-            localStorage.setItem("redirect", true);
-            setTimeout(() => {
-                navigate("/");
-            }, 500);
     }
 
     return (

@@ -25,8 +25,10 @@ function ReviewFlashcard() {
         deck = JSON.parse(deck);
 
         onValue(decksRef, async snapshot => {
-            const data = await snapshot.val();
-            setDecks(Object.values(data))
+            if (snapshot.exists()){
+                const data = await snapshot.val();
+                setDecks(Object.values(data))
+            }
         })
         
         if(deck && !deck[0].uuid){
@@ -190,7 +192,7 @@ function ReviewFlashcard() {
                                     <button
                                         onClick={() =>
                                             navigate(
-                                                `/review-deckname-${deck.deckName}`.split(" ").join("-")
+                                                `/reviewdeck-${deck.uuid}`.split(" ").join("-")
                                             )
                                         }
                                         className="deck"
