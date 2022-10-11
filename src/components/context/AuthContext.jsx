@@ -47,7 +47,7 @@ export const AuthContextProvider = ({children}) => {
                 } else {
                     setUser(result.user);
                 }
-                window.location.href = 'http://localhost:3000/profile'
+                window.location.href = 'https://thedeck.netlify.app/profile'
             }).catch(e => {
                 console.error(e);
             })

@@ -19,8 +19,10 @@ const Profile = () => {
     const fetchData = async () => {
         const decksRef = ref(db, `users/${user.uid}/decks`);
         onValue(decksRef, async snapshot => {
-            const data = await snapshot.val();
-            setCreatedDecks(Object.values(data).length)
+            if(snapshot.exists()){
+                const data = await snapshot.val();
+                setCreatedDecks(Object.values(data).length)
+            }
         })
     }
 
