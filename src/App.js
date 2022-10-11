@@ -9,6 +9,7 @@ import SignUp from "./components/signUpComponents/SignUp";
 import { AuthContextProvider } from "./components/context/AuthContext";
 import Profile from "./components/profileComponents/Profile";
 import ProtectedRoute from "./components/context/ProtectedRoute";
+import ForgotPass from "./components/signInComponents/ForgotPass";
 
 function App() {
   const [decks, setDecks] = useState(null);
@@ -28,6 +29,7 @@ function App() {
           <Route path='/review-flashcard' element={<ProtectedRoute><ReviewFlashcard/></ProtectedRoute>}/>
           <Route path='/sign-in' element={<SignIn />}/>
           <Route path='/sign-up' element={<SignUp />}/>
+          <Route path='/forgot-pass' element={<ForgotPass />}/>
           <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>}/>
           {decks && 
             decks.map(deck => {
