@@ -30,7 +30,6 @@ function CreateForm({toggleForm, deckToEdit}) {
 
   useEffect(() => {
     if (deckToEdit){
-      console.log(deckToEdit)
       setDeck(deckToEdit);
       setCards(deckToEdit.deckCards)
     }
