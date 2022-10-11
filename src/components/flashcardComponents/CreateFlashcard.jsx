@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import CreateForm from './CreateForm';
 import './Create.css';
+import { UserAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function CreateFlashcard() {
+    const {user} = UserAuth();
+    const navigate = useNavigate()
     const [createFlash, setCreateFlash] = useState(false);
 
     const toggleCreateForm = () => {
@@ -28,6 +32,7 @@ function CreateFlashcard() {
           <div className="start-now">
             <div className="cta">
               <p>Begin your studying journey for FREE!</p>
+                {user ? 
                 <button
                   onClick={() => {
                     toggleCreateForm();
@@ -38,6 +43,15 @@ function CreateFlashcard() {
                 >
                   CREATE DECK
                 </button>
+                :
+                <button
+                onClick={() => {
+                  navigate('/sign-up')
+                }}
+              >
+                CREATE DECK
+              </button>
+                }
             </div>
           </div>
         </div>

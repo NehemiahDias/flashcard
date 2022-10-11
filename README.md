@@ -17,16 +17,17 @@ The site gives you the ability to create what's called a "deck" of flash cards f
 ![Create deck 2](./src/resources/create-deck-2.png)
 ![Review Deck](./src/resources/review-deck.png)
 
-The decks that you create are initially saved in LocalStorage and can be exported in JSON format so your decks can pertain accross devices but will be saved to your device browser. I plan to add User Authentication later so each deck is saved to your account but for now, local storage works! You also have the ability to review decks by clicking 'Review' in your nav bar and from here you can mass edit your decks name, description, and each card in the deck as well as delete the deck. If you click on the deck, it will send you to a new page where the deck info is displayed along with the cards. All you need to do is click one of the cards and it will show the other side! There are extra buttons to shuffle the flashcards and to flip all flashcards.
+Since there is User Authentication, The decks that you create are saved in to your created account using a Realtime Database and can be exported in JSON format. You also have the ability to review decks by clicking 'Review' in your nav bar and from here you can mass edit your decks name, description, and each card in the deck as well as delete the deck. If you click on the deck, it will send you to a new page where the deck info is displayed along with the cards. All you need to do is click one of the cards and it will show the other side! There are extra buttons to shuffle the flashcards and to flip all flashcards.
 
 ## Future Plans
-This project has grabbed more interest than I expected. Originally started to help a client study, I have plans to make the site better for sure! User authentication so the info persists accross devices is going to be a huge focus of mine. Later, I definitely plan on adding other ways to study such as: matching title to definition, filling in blanks, and an overall better flashcard experience. 
+Originally started to help a client study, I have plans to make the site better! Later, I definitely plan on adding other ways to study such as: matching title to definition, filling in blanks, and an overall better flashcard experience. 
 
 ## Technology Used
 - ReactJS
+- Firebase (Authentication)
+- Firebase (Realtime Database)
 - HTML
 - CSS
-- localStorage
 - React Router
 
 ## Contributions

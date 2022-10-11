@@ -1,0 +1,58 @@
+.background-popup {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.popup-container {
+    max-width: 500px;
+    border-radius: 10px;
+    width: 90%;
+    height: fit-content;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: var(--dark);
+    padding: 20px 40px;
+}
+.delete-action-btns {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.confirm-del, .cancel-del {
+    width: 50px;
+    padding: 5px 10px;
+}
+.confirm-del:hover, .cancel-del:hover {
+    cursor: pointer;
+}
+.confirm-del {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid rgb(224, 115, 115);
+    color: rgb(224, 115, 115);
+}
+.cancel-del {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--accent);
+    color: var(--accent);
+}
+.popup-container form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.popup-container form input {
+    width: 50%;
+    margin: 0 auto;
+    outline: none;
+    border: 2px solid black;
+    padding: 2px 5px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}

@@ -1,0 +1,117 @@
+.sign-in-container {
+    margin: 50px auto;
+    border-radius: 5px;
+    padding: 40px 20px;
+    max-width: 500px;
+    width: 80%;
+    height: 500px;
+    background-color: #14BDA7;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0 5px;
+}
+.sign-in-container h1 {
+    color: black;
+    text-align: center;
+}
+.sign-in-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
+    height: 80%;
+}
+.sign-in-container input {
+    color: black;
+    width: 100%;
+    margin: 0 auto;
+    border: 2px black solid;
+    padding: 5px 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    outline: none;
+}
+.sign-in-container input::placeholder {
+    color: rgb(54, 54, 54);
+}
+.sign-in-container form:first-of-type {
+    margin-top: 20px;
+}
+.input-field {
+    width: 80%;
+}
+.input-field label {
+    display: block;
+    color: black;
+}
+.input-field input:focus {
+    border-color: var(--dark);
+}
+.link-to-signup, .link-to-forgotpw {
+    text-align: center;
+    background: none;
+    border: none;
+    text-decoration: underline;
+}
+.link-to-signup:hover, .link-to-forgotpw:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+.user-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+}
+.user-actions button, .user-actions a {
+    margin: 0 auto;
+    color: black;
+}
+.sign-in-btn {
+    background-color: var(--accent);
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 50px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.4) -2px 2px 3px;
+    font-weight: bold;
+    padding: 10px 15px;
+}
+.google-sign-in {
+    background-color: white;
+    display: flex;
+    margin: 0 auto;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    border: none;
+    justify-content: space-evenly;
+}
+.google-sign-in:hover {
+    cursor: pointer;
+}
+.google-sign-in span {
+    color: black;
+}
+.google-sign-in img {
+    width: 20px;
+}
+.sign-in-btn:hover {
+    cursor: pointer;
+}
+.error-msg {
+    color: rgb(146, 0, 0);
+}
+.forgot-pass-p {
+    color: black;
+    text-align: center;
+}
+@media screen and (max-width: 400px) {
+    .sign-in-container {
+        width: 90%;
+        padding: 20px 10px;
+    }
+    .input-field {
+        width: 90%;
+    }
+}

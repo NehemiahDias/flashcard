@@ -4,10 +4,17 @@ import NavComponent from "./components/universalComponents/NavComponent";
 import CreateFlashcard from "./components/flashcardComponents/CreateFlashcard";
 import ReviewFlashcard from "./components/flashcardComponents/ReviewFlashcard";
 import DeckReview from "./components/flashcardComponents/DeckReview";
+import SignIn from "./components/signInComponents/SignIn";
+import SignUp from "./components/signUpComponents/SignUp";
+import { AuthContextProvider } from "./components/context/AuthContext";
+import Profile from "./components/profileComponents/Profile";
+import ProtectedRoute from "./components/context/ProtectedRoute";
+import ForgotPass from "./components/signInComponents/ForgotPass";
+import UserProtectedRoute from "./components/context/UserProtectedRoute";
 
 function App() {
   const [decks, setDecks] = useState(null);
-  
+
   useEffect(() => {
     let tempDecks = localStorage.getItem('decks');
     tempDecks = JSON.parse(tempDecks);
@@ -15,21 +22,27 @@ function App() {
   }, [])
 
   return (
-    <BrowserRouter>
-      <NavComponent />
-      <Routes>
-        <Route path='/' element={<CreateFlashcard/>}/>
-        <Route path='/review-flashcard' element={<ReviewFlashcard/>}/>
-        {decks && 
-          decks.map(deck => {
-            let path = `/review-deckname-${deck.deckName}`.split(' ').join('-');
-            return (
-              <Route key={deck} path={path} element={<DeckReview deck={deck} />} />
-            )
-        })
-        }
-      </Routes>
-    </BrowserRouter>
+    <AuthContextProvider>
+      <BrowserRouter>
+        <NavComponent />
+        <Routes>
+          <Route path='/' element={<CreateFlashcard/>}/>
+          <Route path='/review-flashcard' element={<ProtectedRoute><ReviewFlashcard/></ProtectedRoute>}/>
+          <Route path='/sign-in' element={<UserProtectedRoute><SignIn /></UserProtectedRoute>}/>
+          <Route path='/sign-up' element={<UserProtectedRoute><SignUp /></UserProtectedRoute>}/>
+          <Route path='/forgot-pass' element={<ForgotPass />}/>
+          <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>}/>
+          {decks && 
+            decks.map(deck => {
+              let path = `/reviewdeck-${deck.uuid}`.split(' ').join('-');
+              return (
+                <Route key={deck} path={path} element={<DeckReview deck={deck} />} />
+              )
+          })
+          }
+        </Routes>
+      </BrowserRouter>
+    </AuthContextProvider>
   );
 }
 

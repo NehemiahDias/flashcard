@@ -9,8 +9,9 @@ function NavComponent() {
     <div className="navbar">
         <h1 onClick={() => navigate('/')}>The Deck</h1>
         <nav>
-            <Link className='link' to='/'>Create</Link> |
-            <Link className='link' to='review-flashcard'>Review</Link>
+            <Link className='link' to='/'>Home</Link> |
+            <Link className='link' to='review-flashcard'>Review</Link> |
+            <Link className='link' to='profile'>Profile</Link>
         </nav>
     </div>
   )
