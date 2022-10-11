@@ -1,4 +1,5 @@
 .profile-container {
+    margin-top: 30px;
     text-align: center;
 }
 .user-controls {
@@ -20,10 +21,11 @@
     font-weight: bold;
 }
 .delete-acc-btn {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
     border: 2px solid rgb(224, 115, 115);
     padding: 10px 15px;
     border-radius: 5px;
+    font-weight: bold;
     color: rgb(224, 115, 115);
     box-shadow: rgba(0, 0, 0, 0.4) -2px 2px 3px;
 }
@@ -34,10 +36,11 @@
     cursor: pointer;
 }
 .change-email-btn, .change-pass-btn {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
     box-shadow: rgba(0, 0, 0, 0.4) -2px 2px 3px;
     border-radius: 5px;
     border: 2px solid white;
+    font-weight: bold;
     padding: 10px 15px;
 }
 .change-email-btn:hover, .change-pass-btn:hover {

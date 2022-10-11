@@ -18,11 +18,26 @@
 .link:hover {
     text-decoration: none;
 }
-@media screen and (max-width: 400px){
+@media screen and (max-width: 475px){
     .navbar {
         padding: 0 20px;
     }
     .navbar h1 {
         font-size: 1.5rem;
+    }
+}
+@media screen and (max-width: 360px) {
+    .navbar {
+        padding: 0 10px;
+    }
+    .navbar h1 {
+        font-size: 1.3rem;
+    }
+    .navbar nav {
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+    .navbar a {
+        font-size: 0.9rem;
     }
 }

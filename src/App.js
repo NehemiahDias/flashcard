@@ -10,6 +10,7 @@ import { AuthContextProvider } from "./components/context/AuthContext";
 import Profile from "./components/profileComponents/Profile";
 import ProtectedRoute from "./components/context/ProtectedRoute";
 import ForgotPass from "./components/signInComponents/ForgotPass";
+import UserProtectedRoute from "./components/context/UserProtectedRoute";
 
 function App() {
   const [decks, setDecks] = useState(null);
@@ -27,8 +28,8 @@ function App() {
         <Routes>
           <Route path='/' element={<CreateFlashcard/>}/>
           <Route path='/review-flashcard' element={<ProtectedRoute><ReviewFlashcard/></ProtectedRoute>}/>
-          <Route path='/sign-in' element={<SignIn />}/>
-          <Route path='/sign-up' element={<SignUp />}/>
+          <Route path='/sign-in' element={<UserProtectedRoute><SignIn /></UserProtectedRoute>}/>
+          <Route path='/sign-up' element={<UserProtectedRoute><SignUp /></UserProtectedRoute>}/>
           <Route path='/forgot-pass' element={<ForgotPass />}/>
           <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>}/>
           {decks && 
