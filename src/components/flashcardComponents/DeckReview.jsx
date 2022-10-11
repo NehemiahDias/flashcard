@@ -1,8 +1,11 @@
+import { child, get, getDatabase, ref } from "firebase/database";
 import React, { useEffect, useState } from "react";
+import { UserAuth } from "../context/AuthContext";
 import "./DeckReview.css";
 
 function DeckReview({ deck }) {
   const [showedCards, setShowedCards] = useState([...deck.deckCards]);
+  const {user} = UserAuth();
 
   const shuffleCards = () => {
     let newList = [...showedCards];
@@ -17,14 +20,29 @@ function DeckReview({ deck }) {
     return newList;
   }
 
+  const fetchData = async () => {
+    const dbRef = ref(getDatabase());
+    await get(child(dbRef, `users/${user.uid}/decks/${deck.uuid}`)).then(snapshot => {
+      if (snapshot.exists()) {
+        const data = snapshot.val()
+        if (data.deckName !== deck.deckName || data.deckDescription !== deck.deckDescription || data.deckCards.length !== deck.deckCards.length){
+          window.location.reload();
+        }
+      }
+    }).catch(e => {
+      console.error(e)
+    })
+  }
+
   useEffect(() => {
+    fetchData()
     setShowedCards(
       showedCards.map((val) => {
         return { ...val, showingAnswer: false };
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   const handleShowAnswer = (item) => {
     setShowedCards(

@@ -12,7 +12,7 @@ import ProtectedRoute from "./components/context/ProtectedRoute";
 
 function App() {
   const [decks, setDecks] = useState(null);
-  
+
   useEffect(() => {
     let tempDecks = localStorage.getItem('decks');
     tempDecks = JSON.parse(tempDecks);
@@ -31,7 +31,7 @@ function App() {
           <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>}/>
           {decks && 
             decks.map(deck => {
-              let path = `/review-deckname-${deck.deckName}`.split(' ').join('-');
+              let path = `/reviewdeck-${deck.uuid}`.split(' ').join('-');
               return (
                 <Route key={deck} path={path} element={<DeckReview deck={deck} />} />
               )
