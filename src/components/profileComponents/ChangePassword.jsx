@@ -30,7 +30,14 @@ const ChangePassword = ({ user, cancel }) => {
             }).then(() => {
                 cancel()
             }).catch(e => {
-                setError(e.message)
+                switch (e.message) {
+                    case 'Firebase: Error (auth/wrong-password).':
+                        setError('Incorrect Password!')
+                        break;
+                    default:
+                        setError(e.message)
+                        break;
+                }
             })
         }
     }
@@ -40,7 +47,7 @@ const ChangePassword = ({ user, cancel }) => {
             <h2>Change Password</h2>
             <form onSubmit={handleChangePass}>
                 <div className="input-container">
-                    { user.providerData[0].providerId !== 'google.com' || user.providerData.length > 1 &&
+                    { (user.providerData[0].providerId !== 'google.com' || user.providerData.length > 1) &&
                     <>
                         <label htmlFor='current-pass'>Current Password:</label>
                         <input
