@@ -32,6 +32,7 @@ Originally started to help a client study, I have plans to make the site better!
 
 ## Contributions
 Feel free to contribute to this project if you see in open issue or if you'd like to help with refactoring and documentation. I am also open to suggestions on the direction of this project, feel free to join or start a discussion on what should be added. You don't need to ask to contribute, if you see an open issue or you see room for improvement, just follow these steps:
+
 ### Fork the repo
 Click the fork botton on the top of this page to create a copy of this repository.
 ### Clone the repo
